@@ -1,0 +1,6 @@
+.view-container {
+	min-height: 75vh;
+	@include break(320px, 768px) {
+		padding-top: 7rem;
+	}
+}
