@@ -21,14 +21,14 @@
 				width: 100%;
 				position: absolute;
 				top: 50%; left: 50%;
-				@include transform( translate(-50%, -50%) );
+				transform: translate(-50%, -50%);
 				
 			}
 		}
 		a.title-link {
 			h2 {
 				color: $pink;
-				@include transition(color 0.3s ease-in-out);
+				transition: color 0.3s ease-in-out;
 				&:hover {
 					color: $blue;
 				}

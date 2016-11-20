@@ -1,12 +1,15 @@
 .vdc-contact-details {
-	@include display-flex();
-	@include justify-content(space-between);
-	@include align-items(center);
-	@include flex-wrap(wrap);
+	display: flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+	-webkit-align-items: center;
+	align-items: center;
+	flex-wrap: wrap;
 	margin-bottom: 35px;
 
 	a {
-		@include transition(color 0.2s ease-out);
+		transition: color 0.2s ease-out;
 		&:hover, &:focus {
 			color: $purple !important;
 			text-decoration: none;
@@ -14,14 +17,17 @@
 	}
 
 	@include break(768px) {
-		@include flex-wrap(nowrap);
+		flex-wrap: nowrap;
 	}
 
 	.vdc-contact-details-left {	
-		@include display-flex();
-		@include justify-content(space-between);
-		@include align-items(center);
-		@include flex-wrap(wrap);
+		display: flex;
+		justify-content: space-between;
+		-webkit-justify-content: space-between;
+		justify-content: space-between;
+		-webkit-align-items: center;
+		align-items: center;
+		flex-wrap: wrap;
 
 		a {
 			display: block;
@@ -75,8 +81,8 @@
 	padding: 0;
 	margin: 0;
 	list-style-type: none;
-	@include display-flex();
-	@include flex-wrap(wrap);
+	display: flex;
+	flex-wrap: wrap;
 
 	li.gfield {
 		margin-bottom: 10px;
@@ -96,7 +102,7 @@
 			padding: 17px 28px;
 			font-size: 20px;
 			color: #939392;
-			@include transition(border-color 0.2s ease-out);
+			transition: border-color 0.2s ease-out;
 
 			&:focus {
 				outline: none;
@@ -120,7 +126,7 @@
 		text-align: center;
 		padding: 17px 0px;
 		border: none;
-		@include transition(background-color 0.2s ease-out);
+		transition: background-color 0.2s ease-out;
 		font-weight: 600;
 
 		&:hover, &:focus {
@@ -164,7 +170,7 @@ ul.contact-us-tabs {
 	padding: 0;
 	margin: 0;
 	list-style-type: none;
-	@include display-flex;
+	display: flex;
 	li {
 		width: 49%;
 		text-align: center;

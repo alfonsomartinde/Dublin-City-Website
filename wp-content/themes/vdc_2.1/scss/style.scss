@@ -7,7 +7,6 @@ Text Domain: vdc
 */
 
 // Functional SCSS
-@import "compass/css3";
 @import "variables";
 @import "mixins";
 @import "accessibility";
@@ -18,7 +17,7 @@ Text Domain: vdc
 @import "buttons";
 
 // Remove
-@import "testing";
+@import "testing"; 
 
 // Pages
 @import "front-page";

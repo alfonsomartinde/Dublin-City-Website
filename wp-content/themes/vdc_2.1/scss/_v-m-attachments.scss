@@ -1,7 +1,7 @@
 .vdc-v-m-attachments {
-	@include display-flex();
-	@include justify-content(center);
-	@include flex-wrap(wrap);
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
 	padding-top: 60px;
 }
 
@@ -17,7 +17,7 @@
 	
 	&:hover, &:focus {
 		img {
-			@include transform(scale(1.03));
+			transform: scale(1.03);
 		}
 	}
 
@@ -27,7 +27,7 @@
 	padding: 35px 25px 10px;
 	background: $purple;
 	margin-bottom: 10px;
-	@include transition(background 0.3s ease-in-out);
+	transition: background 0.3s ease-in-out;
 	&:hover {
 		background: $pink;
 	}

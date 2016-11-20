@@ -13,7 +13,7 @@
 
 	&:hover, &:focus {
 		img {
-			@include transform(scale(1.03));
+			transform: scale(1.03);
 		}
 	}
 }
@@ -26,21 +26,21 @@
 }
 
 .vdc-volunteer-report-text {
-	#{headings()} {
+	h1, h2, h3, h4, h5, h6 {
 		color: $blue;
 	};
 }
 
 .vdc-volunteer-report {
-	@include display-flex();
-	@include justify-content(center);
-	@include align-items(center);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	img {
 		//width: 50%;
 		height: 80px;
 		padding-right: 25px;
-		@include transition(transform 0.2s ease-out);
+		transition: transform 0.2s ease-out;
 	}
 
 	p.vdc-volunteer-report-title {

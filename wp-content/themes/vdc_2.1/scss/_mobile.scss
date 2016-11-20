@@ -8,9 +8,9 @@
 	//position: relative;
 
 	.container {
-		@include display-flex;
-		@include justify-content(space-between);
-		@include align-items(center);	
+		display: flex;
+		justify-content: space-between;
+		align-items: center;	
 		color: $white;
 		padding: 0 15px;
 		position: relative;
@@ -37,7 +37,7 @@
 		padding: 5px 10px;
 		border: none;
 		font-weight: 600;
-		@include transition(background-color 0.2s ease-out);
+		transition: background-color 0.2s ease-out;
 
 		@include break(768px) {
 			margin: 0 10px;

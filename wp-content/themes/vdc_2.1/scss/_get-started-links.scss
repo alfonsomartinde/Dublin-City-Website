@@ -3,12 +3,12 @@
 	text-align: center;	
 	padding: 30px 15px;
 	margin: 5px;
-	@include transition(background-color 0.2s ease-out);
+	transition: background-color 0.2s ease-out;
 
 	img {
 		margin-bottom: 20px;
 		height: 95px;
-		@include transition(transform 0.2s ease-out);
+		transition: transform 0.2s ease-out;
 		fill: #94d31b; 
 	}
 	i.icon {
@@ -27,7 +27,7 @@
 		background-color: $pink;
 		
 		img {
-			@include transform(scale(1.03));
+			transform: scale(1.03);
 		}
 	}
 }
@@ -42,9 +42,9 @@
 
 
 .vdc-box-links {
-	@include display-flex();
-	@include flex-wrap(wrap);
-	@include justify-content(center);
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .vdc-can-i-volunteer-link-box {

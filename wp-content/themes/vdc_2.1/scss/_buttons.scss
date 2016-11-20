@@ -34,7 +34,7 @@
 	font-size: 3rem;
 	background: $pink;
 	color: $white;
-	@include transition(color 0.3s ease-in-out, background 0.3s ease-in-out);
+	transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
 	&:hover, &:focus {
 		background: $white;
 		color: $pink;

@@ -1,5 +1,4 @@
 footer {
-
 	.event-featured {
 		padding: 5rem 0;
 		text-align: center;
@@ -10,9 +9,9 @@ footer {
 			}
 
 			@include break(992px) {
-				@include display-flex();
-				@include justify-content(space-between);
-				@include align-items(center);
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
 
 				h4 {
 					margin-left: 15px;
@@ -45,9 +44,9 @@ footer {
 					display: none;
 				}
 
-				@include display-flex();
-				@include justify-content(space-between);
-				@include align-items(center);
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
 			}
 		}
 
@@ -68,7 +67,7 @@ footer {
 		color: $white;
 		text-decoration: none;
 		display: inline-block;
-		@include transition(color 0.3s ease-in-out, background 0.3s ease-in-out);
+		transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
 		@include break(768px, 1024px) {
 			padding: 1.5rem 2rem;
 			font-size: 3rem;
@@ -92,7 +91,12 @@ footer {
 		&.org {
 			&:before {
 				content: '';
-				@include background-image( linear-gradient(rgba($purple, 0.8), rgba($purple, 0.8) ) );
+				background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzY0MjI2MyIgc3RvcC1vcGFjaXR5PSIwLjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM2NDIyNjMiIHN0b3Atb3BhY2l0eT0iMC44Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+				background-size: 100%;
+				background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(100, 34, 99, 0.8)), color-stop(100%, rgba(100, 34, 99, 0.8)));
+				background-image: -moz-linear-gradient(rgba(100, 34, 99, 0.8), rgba(100, 34, 99, 0.8));
+				background-image: -webkit-linear-gradient(rgba(100, 34, 99, 0.8), rgba(100, 34, 99, 0.8));
+				background-image: linear-gradient(rgba(100, 34, 99, 0.8), rgba(100, 34, 99, 0.8));
 				width: 100%; height: 100%;
 				position: absolute;
 				// z-index: 1;
@@ -101,7 +105,12 @@ footer {
 		&.vol {
 			&:before {
 				content: '';
-				@include background-image( linear-gradient(rgba($blue, 0.8), rgba($blue, 0.8) ) );
+				background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzI1MmU2OCIgc3RvcC1vcGFjaXR5PSIwLjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyNTJlNjgiIHN0b3Atb3BhY2l0eT0iMC44Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+				background-size: 100%;
+				background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(37, 46, 104, 0.8)), color-stop(100%, rgba(37, 46, 104, 0.8)));
+				background-image: -moz-linear-gradient(rgba(37, 46, 104, 0.8), rgba(37, 46, 104, 0.8));
+				background-image: -webkit-linear-gradient(rgba(37, 46, 104, 0.8), rgba(37, 46, 104, 0.8));
+				background-image: linear-gradient(rgba(37, 46, 104, 0.8), rgba(37, 46, 104, 0.8));
 				width: 100%; height: 100%;
 				position: absolute;
 				// z-index: 1;
@@ -109,7 +118,12 @@ footer {
 		}
 		&:before {
 			content: '';
-			@include background-image( linear-gradient(rgba($purple, 0.8), rgba($purple, 0.8) ) );
+			background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzY0MjI2MyIgc3RvcC1vcGFjaXR5PSIwLjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM2NDIyNjMiIHN0b3Atb3BhY2l0eT0iMC44Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+			background-size: 100%;
+			background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(100, 34, 99, 0.8)), color-stop(100%, rgba(100, 34, 99, 0.8)));
+			background-image: -moz-linear-gradient(rgba(100, 34, 99, 0.8), rgba(100, 34, 99, 0.8));
+			background-image: -webkit-linear-gradient(rgba(100, 34, 99, 0.8), rgba(100, 34, 99, 0.8));
+			background-image: linear-gradient(rgba(100, 34, 99, 0.8), rgba(100, 34, 99, 0.8));
 			width: 100%; height: 100%;
 			position: absolute;
 			// z-index: 1;
@@ -125,10 +139,10 @@ footer {
 		margin: 0;
 		list-style-type: none;
 		&.top-footer {
-			@include display-flex;
-			@include justify-content(space-between);
-			//@include align-content(center);
-			@include align-items(flex-start);
+			display: flex;
+			justify-content: space-between;
+			//align-content: center;
+			align-items: flex-start;
 			color: $white;
 			.logo {
 				max-width: 220px;
@@ -136,10 +150,10 @@ footer {
 			.menu {
 				ul {
 					&.footer-menu {
-						@include display-flex;
-						@include justify-content(space-around);
-						@include align-content(center);
-						@include align-items(center);
+						display: flex;
+						justify-content: space-around;
+						align-content: center;
+						align-items: center;
 						border-bottom: 1px solid $white;
 						padding: 2rem 0;
 						margin-bottom: 2rem;
@@ -181,10 +195,10 @@ footer {
 		}
 
 		ul {
-			@include display-flex;
-			@include justify-content(space-between);
-			@include align-content(center);
-			@include align-items(center);
+			display: flex;
+			justify-content: space-between;
+			align-content: center;
+			align-items: center;
 			color: $white;
 			li {
 				text-align: center;
@@ -219,9 +233,9 @@ footer {
 		}
 		
 		.vdc-logo-and-social {
-			@include display-flex;
-			@include justify-content(space-between);
-			@include align-items(center);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 			padding-top: 1.5rem;
 			padding-bottom: 1.5rem;
 			border-bottom: 2px solid transparentize($white, 0.5);
@@ -258,9 +272,9 @@ footer {
 		
 		.vdc-footer-email-and-phone {
 			@include break(768px) {
-				@include display-flex;	
-				@include justify-content(center);
-				@include align-items(center);
+				display: flex;	
+				justify-content: center;
+				align-items: center;
 
 				.parting {
 					height: 16px;

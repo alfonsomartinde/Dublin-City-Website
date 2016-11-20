@@ -13,7 +13,7 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	background-color: #d7d7d7;
-	@include transition(background-color 0.2s ease-out, border-color 0.2s ease-out);
+	transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
 	border: 1px solid #d7d7d7;
 
 	span {
@@ -22,10 +22,10 @@
 		width: 30px;
 		position: absolute;
 		top: 50%;
-		@include transition(border 0.2s ease-out);
+		transition: border 0.2s ease-out;
 
 		&:last-child {
-			@include transform(rotate(90deg));
+			transform: rotate(90deg);
 		}
 	}
 }
@@ -61,10 +61,10 @@
 .vdc-accordion-title {
 	box-sizing: border-box;
 	border: 1px solid #d7d7d7;
-	@include transition(background-color 0.2s ease-out, color 0.2s ease-out, border 0.2s ease-out);
-	@include display-flex();
-	@include align-items(center);
-	@include justify-content(space-between);
+	transition: background-color 0.2s ease-out, color 0.2s ease-out, border 0.2s ease-out;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	position: relative;
 
 	p {

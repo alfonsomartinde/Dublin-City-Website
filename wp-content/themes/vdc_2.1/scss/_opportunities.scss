@@ -17,9 +17,9 @@
 }
 .opportunities {
 	.opps-item {
-		@include transition( transform 0.3s ease-in-out );
+		transition: transform 0.3s ease-in-out;
 		&:hover {
-			@include transform( scale(1.03) );
+			transform: scale(1.03);
 		}
 	}
 	span {
@@ -73,7 +73,7 @@
 			color: $blue;
 			font-size: 1.8rem;
 			line-height: 3rem;
-			@include transition(color 0.3s ease-in-out);
+			transition: color 0.3s ease-in-out;
 		}
 		a:hover {
 			color: $pink;
@@ -101,7 +101,7 @@
 				top: -1.5rem;
 				left: 0;
 				width: 100%;
-				@include transition(background 0.3s ease-in-out);
+				transition: background 0.3s ease-in-out;
 				&:hover {
 					background: $blue;
 				}
@@ -154,21 +154,21 @@
 ul.by-location-list {
 	// text-align: center;
 	list-style-type: none;
-	@include display-flex;
-	@include justify-content(center);
-	@include flex-flow(row wrap);
+	display: flex;
+	justify-content: center;
+	flex-flow: row wrap;
 	max-width: 50%;
 	margin: 0 auto;
 	padding: 0;
 	li {
-		@include flex-grow(1);
+		flex-grow: 1;
 		width: 25%;
 		text-align: left;
 		padding: 2rem 0;
 		a {
 			font-size: 2rem;
 			color: $black;
-			@include transition(color 0.3s ease-in-out, transform 0.3s ease-in-out);
+			transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 			&:before {
 				content: 'X';
 				font-family: $vdcIcons;
@@ -176,14 +176,14 @@ ul.by-location-list {
 				font-size: 2.5rem;
 				vertical-align: sub;
 				color: lighten($black, 20%);
-				@include transition(color 0.3s ease-in-out, transform 0.3s ease-in-out);
+				transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 			}
 			&:hover {
 				color: $pink;
-				@include transform(scale(1.1));
+				transform: scale(1.1);
 				&:before {
 					color: $pink;
-					@include transform(scale(1.1));
+					transform: scale(1.1);
 				}
 			}
 		}

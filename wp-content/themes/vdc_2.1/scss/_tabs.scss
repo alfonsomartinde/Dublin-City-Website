@@ -1,5 +1,5 @@
 .vdc-tab-panels {
-	@include transition(height 0.3s ease-out);
+	transition: height 0.3s ease-out;
 	margin-bottom: 50px;
 }
 
@@ -17,7 +17,7 @@
 		padding: 13px 10px;
 		margin-bottom: 15px;
 		margin-right: 15px;
-		@include transition(color 0.2s ease-out, background-color 0.2s ease-out);
+		transition: color 0.2s ease-out, background-color 0.2s ease-out;
 
 		&:last-child {
 			margin-right: 0px;
