@@ -209,32 +209,32 @@ nav {
 	}
 }
 a {
-    &.vdc-menu-underline  {
-        position: relative;
-        display: inline-block;
-        text-decoration: none;
-        color: $white;
-        &:after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: $white;
-            opacity: 0;
-            transition: height 0.3s, opacity 0.3s, transform 0.3s;
-            transform: translateY(10px);
-        }
-        &:hover {
-            &:after {
-                text-decoration: none;
-                height: 3px;
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    }
+	&.vdc-menu-underline  {
+		position: relative;
+		display: inline-block;
+		text-decoration: none;
+		color: $white;
+		&:after {
+			content: '';
+			position: absolute;
+			top: 100%;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			background: $white;
+			opacity: 0;
+			transition: height 0.3s, opacity 0.3s, transform 0.3s;
+			transform: translateY(10px);
+		}
+		&:hover {
+			&:after {
+				text-decoration: none;
+				height: 3px;
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	}
 }
 // Main Vol Org Tabs
 .breadcrums_main-tabs {
@@ -245,7 +245,7 @@ a {
 		height: 50px;
 		div {
 			flex-grow: 1;
-			    font-size: 1.5rem;
+			font-size: 1.5rem;
 		}
 	}
 	&.vol, &.org {
