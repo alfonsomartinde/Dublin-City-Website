@@ -8,7 +8,6 @@ nav {
 		background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
 		background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
 		position: relative;
-		// z-index: 1033;
 	}
 	&.vol {
 		background: $blue;
@@ -24,7 +23,6 @@ nav {
 			border-bottom: none;
 		}
 	}
-	// background: green;
 	height: 104px;
 	font-size: 1.8rem;
 	a {
@@ -57,31 +55,30 @@ nav {
 					flex-grow: 0;
 					text-align: center;
 					&.vdc-general-menu {
-						// flex-grow: 1;
+						position: relative;
+						display: block;
 						ul {
 							margin: 0;
 							padding: 1rem 0;
 							list-style-type: none;
-							display: flex;
-							justify-content: space-around;
-							align-items: flex-start;
-							align-content: center;
-							&.sub-menu {
-								display: none;
-							}
 							li {
 								padding: 0 1.5rem;
-								border-right: 1px solid rgba($white, 0.7);
 								line-height: 1.8rem;
-								position: relative;
+								
 								&:last-child {
 									border-right: none;
 								}
-								span {
-									
-								}
 							}
-						}	
+						}
+						> ul > li{
+							border-right: 1px solid rgba($white, 0.7);
+							height: 1em;
+							margin-top: 1em;
+							margin-bottom: 1em;
+							> a{
+								margin-top: -1em;
+							}
+						}
 					}
 					&.vdc-cta-menu {
 						flex-grow: 0.5;
@@ -116,10 +113,9 @@ nav {
 				}
 			}
 			// Specific Menu Flex Settings
-			.vdc-specific-menu {
+			.vdc-specific-menu{
 				ul {
 					margin: 0;
-					padding: 1rem 0 2rem;
 					list-style-type: none;
 					border-bottom: 0.1rem solid rgba($white, 0.7);
 					display: flex;
@@ -127,25 +123,31 @@ nav {
 					align-items: flex-start;
 					align-content: center;
 					li {
-						// padding: 0 2rem;
-						position: relative;
 						flex-grow: 1;
-						border-right: 1px solid rgba($white, 0.7);
 						line-height: 1.8rem;
 						text-align: center;
-						&:first-child {
-							padding-right: 2rem;
-							flex-grow: 0;
-						}
-						&:last-child {
-							flex-grow: 0;
-							border-right: none;
-							padding-left: 2rem; 
-						}
-						span {
-							
-						}
+						
 					}
+				}
+				
+				> ul > li+li:after{
+					background-color: rgba($white, 0.7);
+					margin-top: .6em;
+					display: block;
+					content: '';
+					height: 1em;
+					float: left;
+					width: 1px;
+				}
+			}
+			.vdc-specific-menu, .vdc-general-menu {
+				> ul > li > a {
+					padding: 1rem .5em 2rem;
+					position: relative;
+					z-index: 5;
+				}
+				ul {
+					position: relative;
 				}
 			}
 		}
@@ -154,55 +156,122 @@ nav {
 				position: relative;
 				a {
 					color: white;
-					// margin-right: 15px;
 				}
 			}
-			&.sub-menu {
-				display: none;
-				width: 575px;
+			li.menu-item-has-children {
+				&:before {
+					content: '';
+					position: relative;
+					bottom: -.5em;
+					left: 3.5rem;
+					margin-left: -5px;
+					width: 0;
+					height: 0;
+					border-left: 10px solid transparent;
+					border-right: 10px solid transparent;
+					border-bottom: 10px solid $white;
+					margin-right: auto;
+					opacity: 0;
+					transition: all 0.2s ease;
+					transform: translateY(-.5em);
+				}
+				&:hover:before{
+					opacity: 1;
+					transition: all .1s ease;
+					transform: translateY(0);
+				}
+			}
+			.sub-menu {
+				display: block;
+				transition: all 0.2s ease;
+				opacity: 0;
+				right: 0;
+				left: 0;
 				position: absolute;
+				overflow: hidden;
 				z-index: 1;
 				background: white;
 				padding: 1.5rem !important;
 				color: $submenu;
-				top: 3.8rem;
-				text-align: center;
-				&:before {
+				top: 100%;
+				transform: translateY(-100%);
+				transform: translateY(-2em);
+				max-height: 0;
+				
+				//hack for getting the menu to appear on tap on iOS 
+				&:after{
+					display: none;
 					content: '';
-					position: absolute;
-					top: -10px;
-					width: 0px;
-					height: 0px;
-					border-left: 10px solid transparent;
-					border-right: 10px solid transparent;
-					border-bottom: 10px solid $white;
-					position: absolute;
-					margin-left: auto;
-					margin-right: auto;
-					// z-index: 10;
 				}
+				
 				li {
 					float: left;
 					font-size: 1.5rem;
-					padding: 0rem 0.5rem !important;
-					border-left: 1px solid $submenu;
-					margin: 1rem 0;
-					line-height: 1rem;
-					width: 33%;
-					text-align: center;
+					padding: .5rem .5rem .5rem 2.5rem !important;
+					margin: .5rem 0;
+					// line-height: 0;
+					width: 33.333%;
+					text-align: left;
 					transition: border-color 0.3s ease-in-out;
+					position: relative;
+					
+					&:before{
+						$sub-menu-bar-height: .8em;
+						content: '';
+						left: 0;
+						top: 50%;
+						margin-top: -($sub-menu-bar-height / 2);
+						position: absolute;
+						width: 1px;
+						height: $sub-menu-bar-height;
+						display: block;
+						background-color: $submenu;
+					}
+					
 					&:hover, &:focus {
-						border-left: 1px solid $pink;
+						&:before{
+							background-color: $pink;
+						}
 					}
 					a {
 						color: $submenu;
 						display: block;
 						transition: color 0.3s ease-in-out;
+						// padding: 0;
 						&:hover, &:focus {
 							color: $pink;
 							text-decoration: none;
 						}
 					}
+				}
+			}
+		}
+		.vdc-general-menu ul li {
+			float: left;
+			&.menu-item-has-children {
+				&:hover:before{
+					transform: translateY(2em);
+				}
+			}
+			&.menu-item-has-children:hover .sub-menu {
+				transform: translateY(2.5em);
+			}
+			.sub-menu li {
+				width: 50%;
+			}
+		}
+		.menu-item-has-children:hover {
+			.sub-menu {
+				transition: all 0.1s ease;
+				transform: translateY(0);
+				max-height: 25em;
+				opacity: 1;
+				z-index: 10;
+				
+				//hack for getting the menu to appear on tap on iOS 
+				&:after{
+					display: none;
+					content: '';
 				}
 			}
 		}
