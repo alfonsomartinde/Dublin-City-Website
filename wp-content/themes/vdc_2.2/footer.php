@@ -20,7 +20,6 @@
 			</main>
 				
 			<footer>
-				<?php get_template_part( 'template-parts/footer/footer', 'cta' ); ?>
 				<div class="bottom-bg <?php echo $parent_page; ?>" data-img="<?php echo $bg_img ?>">
 					
 					<!-- Desktop -->
