@@ -38,7 +38,13 @@ if($parent == 6){
 		</script>
 		<?php wp_head(); ?>
 	</head>
-	<body <?php body_class('animated fadeIn'); ?>>			
+	<body <?php body_class('animated fadeIn'); ?>>
+		
+		<?php 
+		// Vars
+			$bg_img_bkup = get_field('fall_back_background_image', 'options');
+			$bg_img = get_the_post_thumbnail_url();
+		?>
 		
 		<? if ( $post->ID == 6 ) { ?>
 		<? // show org homepage ?>
