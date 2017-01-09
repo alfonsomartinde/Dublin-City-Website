@@ -1,9 +1,21 @@
 <?php
-$parent_page = $_COOKIE["page_name"];
-$page_id = $post->ID;
-$bg_img = get_field('background_image', 'options');
-$logo = get_field('logo_footer', 'options');
-$mobile_logo = get_field('mobile_logo', 'options');
+	//find what the parent is
+	$parent = end(get_post_ancestors( $post ));
+
+	// if there is no parent, the current post is the parent
+	if(empty($parent)){
+		$parent = $post->ID;}
+
+	if($parent == 4){
+		$parent_page = "vol"; }
+
+	elseif($parent == 6){
+		$parent_page = "org"; }
+		
+	$page_id = $post->ID;
+	$bg_img = get_field('background_image', 'options');
+	$logo = get_field('logo_footer', 'options');
+	$mobile_logo = get_field('mobile_logo', 'options');
 ?>
 			</main>
 				

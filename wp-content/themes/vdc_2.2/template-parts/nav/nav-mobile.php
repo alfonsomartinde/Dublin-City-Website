@@ -1,14 +1,25 @@
 <!-- Mobile -->
 <?php 
-// get cookie details
-$parent_page = $_COOKIE["page_name"];
-global $post;
-$id = $post->ID;
-if ($id == 6 || $id == 4) {
-	$menu_class = 'transparent';
-} else {
-	$menu_class = $parent_page;
-}
+	//find what the parent is
+	$parent = end(get_post_ancestors( $post ));
+	
+	// if there is no parent, the current post is the parent
+	if(empty($parent)){
+		$parent = $post->ID;}
+	
+	if($parent == 4){
+		$parent_page = "vol"; }
+
+	elseif($parent == 6){
+		$parent_page = "org"; }
+	
+	global $post;
+	$id = $post->ID;
+	if ($id == 6 || $id == 4) {
+		$menu_class = 'transparent';
+	} else {
+		$menu_class = $parent_page;
+	}
 ?>
 <div class="mobile-nav hidden-lg <?php echo $menu_class; ?>">
 	<div class="container">
