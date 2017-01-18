@@ -106,7 +106,7 @@
 						<div class="copywrite-block">
 							<ul>
 								<li class="copywrite">
-									<p>&copy; <?php the_date("Y"); ?> Volunteer Center<br>All rights reserved</p>
+									<p>&copy; <?php the_date("Y");?> &nbsp;<? echo get_bloginfo( 'name' ); ?> <br>All rights reserved</p>
 								</li>
 								<li class="social-footer">
 									<?php vdc_social_link_plain('', true); ?>
