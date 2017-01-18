@@ -14,6 +14,7 @@ if($parent == 6){
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> ng-app="vdcApp">
+
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,7 +51,7 @@ if($parent == 6){
 		<? // show org homepage ?>
 		
 			<!-- Page Header -->
-			<header id="org-home" data-img="<?php echo ( !empty($bg_img) ? $bg_img : $bg_img_bkup['url']);?>">
+			<header id="org-home" style="background-size:cover;background-image:url('<?php echo ( !empty($bg_img) ? $bg_img : $bg_img_bkup['url']);?>')">
 				<!-- Navigation -->
 				<?php get_template_part( 'template-parts/nav/nav', 'top' ); ?>
 				<div class="header-content-wrapper">
@@ -65,7 +66,7 @@ if($parent == 6){
 		<? // show vol homepage ?>
 		
 			<!-- Page Header -->
-			<header id="vol-home" data-img="<?php echo ( !empty($bg_img) ? $bg_img : $bg_img_bkup['url']);?>">
+			<header id="vol-home" style="background-size:cover;background-image:url('<?php echo ( !empty($bg_img) ? $bg_img : $bg_img_bkup['url']);?>')">
 				<!-- Navigation -->
 				<?php get_template_part( 'template-parts/nav/nav', 'top' ); ?>
 				<div class="header-content-wrapper">
