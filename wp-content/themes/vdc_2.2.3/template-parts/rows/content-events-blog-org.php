@@ -82,10 +82,20 @@ if ($parent_page == "org") {
 					<a href="<?php echo esc_url(home_url('/newsblog/news/')); ?>" class="link-arrow-pink">See All</a>
 				</div>
 				<?php 
-					$post_args = array(
-						'post_type' => 'post', 
-						'posts_per_page' => 2
+					// temp conditional call to load the MAnaging Volunteers section on the front page
+					
+					if ($parent_page == "org") {
+						$post_args = array(
+							'post_type' => 'managing-volunteers', 
+							'posts_per_page' => 2
 						);
+					} else {
+						$post_args = array(
+							'post_type' => 'post', 
+							'posts_per_page' => 2
+						);
+					}
+					
 					$post_query = new WP_Query($post_args);
 				 ?>
 
@@ -99,7 +109,7 @@ if ($parent_page == "org") {
 							 ?>
 							<li class="col-md-6">
 								<a href="<?php echo the_permalink(); ?>">
-									<figure class="post-img bck_img" style="background-image:url(<?php echo $img_url ?>"></figure>
+									<figure class="post-img bck_img" style="background-image:url(<?php echo $img_url ?>)"></figure>
 								</a>
 								<a href="<?php echo the_permalink(); ?>"><h5><?php echo $title ?></h5></a>
 							</li>
