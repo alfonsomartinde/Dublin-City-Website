@@ -7,8 +7,8 @@ function vdc_social_link($class = '', $email = false) {
 		'linkedin' => get_field('linkedin', 'options'),
 		'pinterest' => get_field('pinterest', 'options'),
 		'google' => get_field('google_plus', 'options'),
-		'instagram' => get_field('instagram', 'options'),
-		'envelope' => get_field('email_address', 'options')
+		'instagram' => get_field('instagram', 'options')
+		// 'envelope' => get_field('email_address', 'options')
 	);	
 	if ($email == false) {
 		unset($social_links['envelope']);
@@ -36,8 +36,8 @@ function vdc_social_link_plain($class = '', $email = false) {
 		'linkedin' => get_field('linkedin', 'options'),
 		'pinterest' => get_field('pinterest', 'options'),
 		'google' => get_field('google_plus', 'options'),
-		'instagram' => get_field('instagram', 'options'),
-		'envelope' => get_field('email_address', 'options')
+		'instagram' => get_field('instagram', 'options')
+		// 'envelope' => get_field('email_address', 'options')
 	);	
 	if ($email == false) {
 		unset($social_links['envelope']);

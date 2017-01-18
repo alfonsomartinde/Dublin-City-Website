@@ -35,10 +35,5 @@ elseif($parent == 6){
 
 	<div class="vdc-social-top">
 		<?php vdc_social_link_plain('list-inline', true); ?>
-		<!-- <ul class="list-inline">
-			<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-			<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-			<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-		</ul> -->
 	</div>
 </div>
