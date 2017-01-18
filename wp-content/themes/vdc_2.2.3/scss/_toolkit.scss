@@ -46,3 +46,21 @@
 		}
 	}
 }
+
+
+
+// make background images cover their element
+.bck_img{
+	background-position: center center;
+	background-size: 100% auto;
+	background-size: cover;
+}
+
+.rel{
+	position: relative;
+}
+.abs{
+	position: absolute;
+}
+
+// class="bck_img" style="background-image:url(<?php echo $bg_img['url'] ?>)"

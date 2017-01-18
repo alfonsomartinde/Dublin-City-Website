@@ -32,7 +32,7 @@ ga('newTracker.send', 'pageview');
 	<body <?php body_class('animated fadeIn'); ?>>			
 		
 		<!-- Page Header -->
-		<header id="org-home" data-img="<?php echo ( !empty($bg_img) ? $bg_img : $bg_img_bkup['url']);?>">
+		<header id="org-home" class="bck_img" style="background-image:url(<?php echo ( !empty($bg_img) ? $bg_img : $bg_img_bkup['url']);?>)">
 			<!-- Navigation -->
 			<?php get_template_part( 'template-parts/nav/nav', 'top' ); ?>
 			<div class="header-content-wrapper">

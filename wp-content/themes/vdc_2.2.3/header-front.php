@@ -28,7 +28,7 @@ ga('newTracker.send', 'pageview');
 	// Vars
 		$bg_img = get_field('fall_back_background_image', 'options');
 	?>
-	<body <?php body_class('animated fadeIn'); ?> data-img="<?php echo $bg_img['url'] ?>">
+	<body class="home bck_img" style="background-image:url(<?php echo $bg_img['url'] ?>)" <?php body_class('animated fadeIn'); ?>>
 		
 		<main class="vdc-tint-b-p">
 		

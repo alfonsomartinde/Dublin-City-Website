@@ -11,7 +11,7 @@
 				$text = get_sub_field('slide_text');
 			?>
 			
-			<div class="wb-slider-item" data-img="<?php echo $img['url']; ?>">
+			<div class="wb-slider-item bck_img" style="background-image:url(<?php echo $img['url']; ?>)">
 				<div class="content">
 					<?php echo $text ?>
 				</div>

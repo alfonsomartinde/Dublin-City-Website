@@ -98,7 +98,9 @@ if ($parent_page == "org") {
 								$img_url = get_the_post_thumbnail_url();
 							 ?>
 							<li class="col-md-6">
-								<a href="<?php echo the_permalink(); ?>"><figure class="post-img" data-img="<?php echo $img_url ?>"></figure></a>
+								<a href="<?php echo the_permalink(); ?>">
+									<figure class="post-img bck_img" style="background-image:url(<?php echo $img_url ?>"></figure>
+								</a>
 								<a href="<?php echo the_permalink(); ?>"><h5><?php echo $title ?></h5></a>
 							</li>
 						<?php endwhile; wp_reset_postdata(); ?>

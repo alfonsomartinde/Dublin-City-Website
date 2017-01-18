@@ -20,7 +20,7 @@
 			</main>
 				
 			<footer>
-				<div class="bottom-bg <?php echo $parent_page; ?>" data-img="<?php echo $bg_img ?>">
+				<div class="rel bottom-bg bck_img <?php echo $parent_page; ?>" style="background-image:url(<?php echo $bg_img ?>)">
 					
 					<!-- Desktop -->
 					<div class="visible-lg container footer-content">
