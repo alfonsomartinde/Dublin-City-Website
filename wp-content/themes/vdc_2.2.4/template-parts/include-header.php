@@ -47,9 +47,11 @@ if($parent == 6){
 			$bg_img = get_the_post_thumbnail_url();
 		?>
 		
+		<?php get_template_part( 'template-parts/nav/nav', 'mobile' ); ?>
+		
 		<? if ( $post->ID == 6 ) { ?>
 		<? // show org homepage ?>
-		
+			
 			<!-- Page Header -->
 			<header id="org-home" style="background-size:cover;background-image:url('<?php echo ( !empty($bg_img) ? $bg_img : $bg_img_bkup['url']);?>')">
 				<!-- Navigation -->
@@ -59,12 +61,11 @@ if($parent == 6){
 					<a href="<?php echo esc_url( home_url('/org/get-started-org/') ); ?>" class="home-cta">Get Started</a>
 				</div>
 			</header>
-			<?php get_template_part( 'template-parts/nav/nav', 'mobile' ); ?>
 			<main>
 		
 		<? } elseif ( $post->ID == 4 ) { ?>
 		<? // show vol homepage ?>
-		
+			
 			<!-- Page Header -->
 			<header id="vol-home" style="background-size:cover;background-image:url('<?php echo ( !empty($bg_img) ? $bg_img : $bg_img_bkup['url']);?>')">
 				<!-- Navigation -->
@@ -74,7 +75,6 @@ if($parent == 6){
 					<a href="<?php echo esc_url( home_url('/vol/get-started-vol/') ); ?>" class="home-cta">Get Started</a>
 				</div>
 			</header>
-			<?php get_template_part( 'template-parts/nav/nav', 'mobile' ); ?>
 
 			<main>
 		
@@ -82,7 +82,6 @@ if($parent == 6){
 		
 			<!-- Navigation -->
 			<?php get_template_part( 'template-parts/nav/nav', 'top' ); ?>
-			<?php get_template_part( 'template-parts/nav/nav', 'mobile' ); ?>
 			<main>
 		
 		<? } ?>
