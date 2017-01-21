@@ -37,10 +37,43 @@ if($parent == 6){
 			ga('create', 'UA-82657092-1', 'auto', {'name': 'newTracker'});	 
 			ga('newTracker.send', 'pageview');
 		</script>
+		
+		<? // show the ADMIN info
+			$current_user = wp_get_current_user();
+			
+			$whitelist = array(
+				'127.0.0.1',
+				'localhost'
+			); 
+			
+			$is_local = false;
+			if(in_array($_SERVER['SERVER_NAME'], $whitelist)){ $is_local = true; }
+			
+			$WP_admin_loggedin = false;
+			if (user_can( $current_user, 'administrator' )) { $WP_admin_loggedin = true; }
+			
+			if($WP_admin_loggedin){ ?>
+				<link rel="stylesheet" type="text/css" href="<? echo get_stylesheet_directory_uri(). '/dev.css' ?>">
+			<? }
+		?>
+		
 		<?php wp_head(); ?>
 	</head>
 	<body <?php body_class('animated fadeIn'); ?>>
-		
+		<? if($WP_admin_loggedin){ ?>
+			<div class="dev_message_container">
+				<div class="dev_message">
+					<p>
+						<? if($is_local){ ?>
+							👍 local site 
+						<? } else { ?>
+							<span class="blink_me">🔴</span> LIVE SITE
+						<? } 
+						if (user_can( $current_user, 'administrator' )) { ?>, logged in as <b>admin</b>, <?php edit_post_link('edit current page', '<span>', '</span>'); ?> <? } ?>
+					</p>
+				</div>
+			</div>
+		<? } ?>
 		<?php 
 		// Vars
 			$bg_img_bkup = get_field('fall_back_background_image', 'options');
