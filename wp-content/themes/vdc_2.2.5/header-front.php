@@ -39,7 +39,7 @@ ga('newTracker.send', 'pageview');
 			if (user_can( $current_user, 'administrator' )) { $WP_admin_loggedin = true; }
 			
 			if($WP_admin_loggedin){ ?>
-				<link rel="stylesheet" type="text/css" href="<? echo get_stylesheet_directory_uri(). '/dev.css' ?>">
+				<link rel="stylesheet" type="text/css" href="<? echo get_stylesheet_directory_uri(). '/css/dev.css' ?>">
 			<? }
 		?>
 

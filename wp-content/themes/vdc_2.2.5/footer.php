@@ -70,8 +70,7 @@
 
 									<div class="contact-info">
 										<?php 
-											$location = get_field('hq_office_location', 'option'); 
-											$address = $location['address'];
+											$address = get_field('office_location', 'option'); 
 											$mail = get_field('email_address', 'option');
 											$tel = get_field('phone_number', 'option');
 											$tel_link = str_replace(' ', '', $tel);
