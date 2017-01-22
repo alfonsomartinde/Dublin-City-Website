@@ -1,6 +1,7 @@
 # Keep these files out of the repo
 /wp-content/themes/twenty*
-/wp-content/themes/vdc*/vdc.css
+/wp-content/themes/vdc*/css/vdc.css
+/wp-content/themes/vdc*/css/dev.css
 /wp-content/upgrade
 /wp-content/uploads
 /sitemap.*
