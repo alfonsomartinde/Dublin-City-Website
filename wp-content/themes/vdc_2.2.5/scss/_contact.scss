@@ -44,14 +44,6 @@
 				display: inline-block;
 				width: auto;
 				margin-bottom: 0;
-
-				&:first-child {
-					border-right: 1px solid #b9b9b9;
-				}
-
-				&:last-child {
-					padding-left: 25px;
-				}
 			}
 		}
 	}
