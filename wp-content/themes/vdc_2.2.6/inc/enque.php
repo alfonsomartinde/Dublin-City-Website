@@ -8,7 +8,7 @@ function wbstarter_styles() {
 	wp_enqueue_style( 'bootstrap_css', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' );
 	wp_enqueue_style( 'angular_loading_bar_css', get_stylesheet_directory_uri(). '/app/lib/loading-bar.min.css' );
 	wp_enqueue_style( 'angular_tooltip_css', get_stylesheet_directory_uri(). '/app/lib/angular-tooltips.min.css' );
-	wp_enqueue_style( 'main_css',get_stylesheet_directory_uri(). '/css/vdc.css' );
+	wp_enqueue_style( 'main_css',get_stylesheet_directory_uri(). '/vdc.css' );
 }
 add_action( 'wp_enqueue_scripts', 'wbstarter_styles' );
 //Add scripts to site
