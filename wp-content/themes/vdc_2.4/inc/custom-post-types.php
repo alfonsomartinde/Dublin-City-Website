@@ -64,6 +64,33 @@ $vdc_opps->columns(array(
     	'date' => __('Published')
 ));
 
+
+
+// Opportunities
+$vdc_opportunities = new CPT(array(
+	'post_type_name' => 'opp',
+	'singular' => 'Opportunity',
+	'plural' => 'New Opportunities',
+	'slug' => 'opp'
+), array(
+	'supports'	=> array('title'),
+	// 'show_in_rest'       => true,
+	// 'rest_base'          => 'opps-api',
+	'rest_controller_class' => 'WP_REST_Posts_Controller',
+));
+
+// function wpdocs_create_opp_tax() {
+//     register_taxonomy( 'opp_category', 'opp', array(
+//         'label'        => __( 'Opprtunity Category', 'textdomain' ),
+//         'rewrite'      => array( 'slug' => 'opp_category' ),
+//         'hierarchical' => true,
+//     ) );
+// }
+// add_action( 'init', 'wpdocs_create_opp_tax', 0 );
+$vdc_opportunities->menu_icon('dashicons-list-view');
+
+
+
 // Populate the column text
 $vdc_opps->populate_column('organisation', function($column, $post) {
 

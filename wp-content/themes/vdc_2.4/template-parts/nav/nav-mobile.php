@@ -37,23 +37,8 @@
 	
 	
 	<div class="mobile-menu">
-		<?php
-			wp_nav_menu( array(
-				'menu'              	=> 'general_top',
-				'theme_location'    => 'general_top',
-				'depth'             		=> 2,
-				'container'         	=> 'div',
-				'container_class'   	=> '',
-				'container_id'     	=> '',
-				'menu_class'        	=> '',
-				// 'link_before' 		=> '<span>',
-				// 'link_after' 			=> '</span>',
-				'fallback_cb'       	=> 'wp_bootstrap_navwalker::fallback',
-				'walker'           		=> new vdc_navwalker())
-			);
-		?>
 		<?php 
-		if ($parent_page == 'vol') {
+		if ($section == 'vol') {
 			wp_nav_menu( array(
 				'menu'              	=> 'vol_mob',
 				'theme_location'    => 'vol_mob',
@@ -67,7 +52,7 @@
 				'fallback_cb'       	=> 'wp_bootstrap_navwalker::fallback',
 				'walker'           		=> new vdc_navwalker())
 			);
-		} elseif ($parent_page == 'org') {
+		} elseif ($section == 'org') {
 			wp_nav_menu( array(
 				'menu'              	=> 'org_mob',
 				'theme_location'    => 'org_mob',
@@ -82,7 +67,19 @@
 				'walker'           		=> new vdc_navwalker())
 			);
 		} else {
-
+			wp_nav_menu( array(
+				'menu'              	=> 'gen_top_mob',
+				'theme_location'    => 'gen_top_mob',
+				'depth'             		=> 2,
+				'container'         	=> 'div',
+				'container_class'   	=> '',
+				'container_id'     	=> '',
+				'menu_class'        	=> '',
+				// 'link_before' 		=> '<span>',
+				// 'link_after' 			=> '</span>',
+				'fallback_cb'       	=> 'wp_bootstrap_navwalker::fallback',
+				'walker'           		=> new vdc_navwalker())
+			);
 		}
 		?>
 	</div>
