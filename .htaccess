@@ -1,8 +1,14 @@
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule wp-content/uploads/(.*) http://volunteerdublincity.ie/wp-content/uploads/$1 [C,P]
+
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.php [L]
