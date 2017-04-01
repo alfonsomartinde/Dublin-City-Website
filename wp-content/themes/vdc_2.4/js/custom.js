@@ -6,7 +6,7 @@ jQuery(document).ready(function( jQuery ) {
 
 	jQuery('.wb-l-blue-bg a').addClass('vdc-menu-underline');
 	jQuery('.wb-l-purple-bg a').addClass('vdc-menu-underline');
-	
+
 	// Mobile Menu Icon Trigger
 	function mobile_menu_trigger() {
 		var $hamburger = jQuery(".hamburger");
@@ -21,10 +21,10 @@ jQuery(document).ready(function( jQuery ) {
 		if ( jQuery(window).width() < 1200 ) {
 			if ( jQuery('li.menu-item-has-children ul').hasClass('sub-menu') ) {
 				jQuery('li.menu-item-has-children ul').removeClass('sub-menu')
-				.addClass('mobile-sub-menu');					
+				.addClass('mobile-sub-menu');
 			}
-			
-		} 
+
+		}
 		jQuery('li.menu-item-has-children').on('click', function(event) {
 			// event.preventDefault();
 			jQuery(this).children('.mobile-sub-menu').slideToggle(300);
@@ -33,13 +33,13 @@ jQuery(document).ready(function( jQuery ) {
 	}
 
 	// Full Back Ground Images
-	// function wb_full_bg_img(selector) {
-	// 	var $selector = jQuery(''+selector+'');
-	// 	var $img = $selector.attr('data-img');
-	// 	if ($selector[0]) {
-	// 		$selector.backstretch($img);
-	// 	}
-	// }
+	function wb_full_bg_img(selector) {
+		var $selector = jQuery(''+selector+'');
+		var $img = $selector.attr('data-img');
+		if ($selector[0]) {
+			$selector.backstretch($img);
+		}
+	}
 
 	function wb_slick_fullbg(parent, child) {
 		var $parent = jQuery(''+parent+'');
@@ -47,8 +47,8 @@ jQuery(document).ready(function( jQuery ) {
 		// Init Slider
 		$parent.slick({
 			dots: false,
-			arrows: false, 
-			// autoplay: true, 
+			arrows: false,
+			// autoplay: true,
 			fade: true
 		});
 
@@ -66,7 +66,7 @@ jQuery(document).ready(function( jQuery ) {
 			var $parent = jQuery('ul.top-menu li.menu-item-has-children');
 			var $child = jQuery("ul.sub-menu");
 			var $this = jQuery(this);
-			
+
 			/*==============
 			Click to Open .stop
 			==============*/
@@ -112,7 +112,7 @@ jQuery(document).ready(function( jQuery ) {
 	    			// console.log($menuText + ' menu item width is: ' +$menuItemWidth+ '\n' +
 	    			// 				'Sub Menu Distance Left: ' + sMDL.left + '\n'+
 	    			// 				'The Arrow should be at: ' + $arrowPosition + '\n');
-	 
+
 	    			// Set the arrow position
 	    			if ( $uO > 0 ) {
 	    				jQuery('<style>.sub-menu::before{left:'+( ( ($menuItemWidth/2 ) - 10 ) + $uO )+'px}</style>').appendTo('head');
@@ -138,13 +138,13 @@ jQuery(document).ready(function( jQuery ) {
 					  		jQuery(this).removeClass('active');
 					  	});
 					}
-				  	
+
 				});
 
 			});
 		}vdc_sub_menu();
 	}
-	
+
 
 	// Add Background Images
 	jQuery('figure').each(function(index, el) {
@@ -169,8 +169,8 @@ jQuery(document).ready(function( jQuery ) {
 				console.log(cookie);
 			});
 		}
-		
-		
+
+
 	}
 
 	function getCook(cookiename) {
@@ -181,22 +181,22 @@ jQuery(document).ready(function( jQuery ) {
 	}
 
 
-	
+
 	// accordion
 	function accordion_slides() {
 		var $tab = jQuery('.vdc-accordion-tab');
 
 		$tab.click(function(){
-			
+
 			// plus icon animation
 			jQuery('.vdc-accordion-plus span:last-child').fadeIn('100');
 
 			// sliding animation
 			if(jQuery(this).hasClass('is-active')) {
-				
+
 				$tab.children('.vdc-accordion-content').slideUp('300');
 				$tab.removeClass('is-active');
-			} 
+			}
 
 			else {
 
@@ -218,7 +218,7 @@ jQuery(document).ready(function( jQuery ) {
 		$panel = jQuery('.vdc-tab-panel');
 
 		// $trigger.click(function() {
-			
+
 		// 	// hide all panels
 		// 	$panel.fadeOut("200");
 		// });
@@ -262,7 +262,7 @@ jQuery(document).ready(function( jQuery ) {
 		var $startFilter = $grid.attr('data-start-filter');
 		$grid.isotope({
 			itemSelector: '.vdc-staff-member',
-			layoutMode: 'fitRows', 
+			layoutMode: 'fitRows',
 			filter: $startFilter
 		});
 
@@ -287,8 +287,8 @@ jQuery(document).ready(function( jQuery ) {
 
 	}
 
-	
-	
+
+
 
 	// CALL ALL FUNCTIONS HERE
 	mobile_menu_trigger();
@@ -298,7 +298,7 @@ jQuery(document).ready(function( jQuery ) {
 		staff_section();
 	}
 	staff_isotope_grid();
-	
+
 	// Full BG Slider
 	wb_slick_fullbg('.wb-slider', '.wb-slider-item');
 
@@ -307,6 +307,6 @@ jQuery(document).ready(function( jQuery ) {
 	wb_full_bg_img('#vol-home');
 	wb_full_bg_img('#org-home');
 	wb_full_bg_img('.bottom-bg');
-	
+
 });
 
