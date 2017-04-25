@@ -99,21 +99,8 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 		
 		
 		<?php 
-		$posts = get_posts(array(
-			'post_type'			=> 'opp',
-			'posts_per_page'	=> -1,
-			'meta_query'		=> array(
-				array(
-					'key'				=> 'opp_category',
-					'value'				=> $opp_category,
-					'compare' => 'LIKE',
-				)
-			),
-			
-			'meta_key'			=> 'activity',
-			'orderby'			=> 'meta_value',
-			'order'				=> 'ASC'
-		));
+		
+		$posts = get_posts($args);
 
 		if( $posts ): ?>
 			
