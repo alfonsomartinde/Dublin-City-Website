@@ -41,36 +41,13 @@ $vdc_vol_events->register_taxonomy(array(
     'slug' => 'volcats'
 ));
 
-// Opportunities
-$vdc_opps = new CPT(array(
-	'post_type_name' => 'opportunity',
-	'singular' => 'Opportunity',
-    	'plural' => 'Opportunities',
-    	'slug' => 'opportunity'
-), array(
-	'supports'	=> array('title', 'editor', 'thumbnail'),
-	'show_in_rest'       => true,
-	'rest_base'          => 'opps-api',
-	'rest_controller_class' => 'WP_REST_Posts_Controller',
-));
-$vdc_opps->menu_icon('dashicons-calendar-alt');
-
-// Opps Columns
-$vdc_opps->columns(array(
-	'cb' => '<input type="checkbox" />',
-    	'title' => __('Title'),
-    	'organisation' => __('Organisation'),
-    	'activity' => __('Activity (iVol)'),
-    	'date' => __('Published')
-));
-
 
 
 // Opportunities
 $vdc_opportunities = new CPT(array(
 	'post_type_name' => 'opp',
 	'singular' => 'Opportunity',
-	'plural' => 'New Opportunities',
+	'plural' => 'Opportunities',
 	'slug' => 'opp'
 ), array(
 	'supports'	=> array('title'),
@@ -79,42 +56,7 @@ $vdc_opportunities = new CPT(array(
 	'rest_controller_class' => 'WP_REST_Posts_Controller',
 ));
 
-// function wpdocs_create_opp_tax() {
-//     register_taxonomy( 'opp_category', 'opp', array(
-//         'label'        => __( 'Opprtunity Category', 'textdomain' ),
-//         'rewrite'      => array( 'slug' => 'opp_category' ),
-//         'hierarchical' => true,
-//     ) );
-// }
-// add_action( 'init', 'wpdocs_create_opp_tax', 0 );
 $vdc_opportunities->menu_icon('dashicons-list-view');
-
-
-
-// Populate the column text
-$vdc_opps->populate_column('organisation', function($column, $post) {
-
-	echo get_field('organisation'); // ACF get_field() function
-
-});
-
-$vdc_opps->populate_column('activity', function($column, $post) {
-
-	$field = get_field_object('activity');
-	$value = get_field('activity');
-	$label = $field['choices'][ $value ];
-	
-	echo $label;
-
-});
-
-// Opps Columns Sortable
-$vdc_opps->sortable(array(
-	'organisation' => array('organisation', false),
-	'activity' => array('activity', false)
-));
-
-
 
 
 
