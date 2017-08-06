@@ -39,6 +39,8 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 				'post_type'			=> 'opp',
 				'ignore_sticky_posts' => 1,
 				'paged'					=> $paged,
+				'orderby'			=> 'activity',
+				'order'				=> 'ASC',
 				
 				'meta_query'		=> array(
 					array(
@@ -56,6 +58,8 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 				'post_type'			=> 'opp',
 				'ignore_sticky_posts' => 1,
 				'paged'					=> $paged,
+				'orderby'			=> 'activity',
+				'order'				=> 'ASC',
 				
 				'meta_query'		=> array(
 					array(
@@ -73,17 +77,23 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 				'post_type'			=> 'opp',
 				'ignore_sticky_posts' => 1,
 				'paged'					=> $paged,
+				'orderby'			=> 'activity',
+				'order'				=> 'ASC',
 				
 				'meta_key'		=> 'latest',
 				'meta_value'	=> true
 			);
 		}
 		
-		$loop = new WP_Query( $args );
+		$posts = get_posts($args);
+		
 		$activities = array();
-		while ( $loop->have_posts() ) : $loop->the_post(); 
+		foreach( $posts as $post ){ 
 			array_push($activities, get_field("activity"));
-		endwhile; 
+		}
+		$activities = array_unique($activities);
+		asort($activities);
+		
 		?>
 		
 		
@@ -97,128 +107,89 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 		
 		<section class="opportunities">
 		
-		
 		<?php 
 		
-		$posts = get_posts($args);
-
 		if( $posts ): ?>
 			
 			<?php 
 			
-			$prev_activity = '';
-			foreach( $posts as $post ): 
-				
-				setup_postdata( $post );
-				
-				$the_activity = get_field('activity');
-				
-				 if ($the_activity != $prev_activity) { ?>
-					<span class="icon icon-<? the_field('activity'); ?> opportunity-title-icon"></span>
-					<h2 class="opportunity-title line-after">
-						<span>
-						<? 
-							$field = get_field_object('field_58d3cc32553ef');
-							$value = get_field('activity');
-							echo $field['choices'][ $value ];
-						?></span>
-					</h2>
-				<? } 
-				?>
-				
-				<div class="opportunities">
+			foreach( $activities as $activity ){ ?>
+				<span class="icon icon-<? echo $activity; ?> opportunity-title-icon"></span>
+				<h2 class="opportunity-title line-after">
+					<span>
+					<? 
+						$field = get_field_object('field_58d3cc32553ef');
+						$value = get_field('activity');
+						echo $field['choices'][ $activity ];
+					?></span>
+				</h2>
+			<?
+			
+				foreach( $posts as $post ): 
+					
+					setup_postdata( $post );
+					
+					// if the current post is the current activity
+					if(get_field('activity') == $activity ){
+					
+					?>
+					
+					<div class="opportunities">
 
-				<div class="opps-item">
-					<div>
-						<div class="row opportunity-item">
-							<div class="col-xs-6 col-md-3 sub-item">
-								<h5>Opportunity</h5>
-								<p>
-									<? the_title(); ?>
-								</p>
-							</div>
-							<div class="col-xs-6 col-md-2 sub-item">
-								<? $opp_category = get_field('opp_category');
-									foreach ($opp_category as $key => $value) { ?>
-									<div class="col-xs-6 col-sm-3 col-md-6"> 
-										<a class="opp_category" href="<? echo home_url(add_query_arg(array(),$wp->request)); ?>?c=<? echo $value; ?>">
-											<i class="icon icon-<? echo $value; ?> " tooltips tooltip-template="<? echo $value; ?>"></i>
-										</a>
-									</div>
-								<? } ?>
-							</div>
-							<div class="clearfix visible-xs visible-sm"></div>
-							<div class="col-xs-6 col-md-3 sub-item">
-								<h5>Organisation</h5>
-								<p>
-									<? the_field("organisation"); ?>
-								</p>
-							</div>
-							<div class="col-xs-6 col-md-3 sub-item location">
-								<h5>Location</h5>
-								<a href="http://maps.google.com/maps?z=12&t=m&q=loc:<? echo get_field("location")['lat']; ?>+<? echo get_field("location")['lng']; ?>" target="_blank">
-									<? the_field("location_text"); ?>
-								</a>
-							</div>
-							<style>
-								@media screen and (min-width: 992px) {
-									.opportunity-item{
-										overflow: hidden
-									}
-									.view a{
-										z-index: 10;
-										height: 5em; 
-										margin-top: 0; 
-										left: .845em;
-										position: relative;
-									}
-									.view a:after{
-										content: '';
-										bottom: -100%;
-										right: 0;
-										left: 0;
-										top: 0;
-										background: #e00d7b;
-										display: block;
-										position: absolute;
-										z-index: -1;
-									}
-								}
-								@media screen and (max-width: 992px) {
-									.view a{
-										top: 0  !important;
-										left: -1em !important;
-										position: relative !important;
-										margin-top: .75em
-									}
-									.view a span{
-										position: static !important
-									}
-									.view a span:after{
-										position: relative !important;
-										padding-left: .5em;
-										top: .2em !important;
-									}
-								}
-							</style>
-							<div class="col-xs-12 col-md-1 sub-item view">
-								<a href="<? the_field("ivol_link"); ?>" target="_blank" ><span>View</span></a>
+					<div class="opps-item">
+						<div>
+							<div class="row opportunity-item">
+								<div class="col-xs-6 col-md-3 sub-item">
+									<h5>Opportunity</h5>
+									<p>
+										<? the_title(); ?>
+									</p>
+								</div>
+								<div class="col-xs-6 col-md-2 sub-item">
+									<? $opp_category = get_field('opp_category');
+										foreach ($opp_category as $key => $value) { ?>
+										<div class="col-xs-6 col-sm-3 col-md-6 opp_out"> 
+											<a class="opp_category" aira-label="<? echo $value;?>"
+												href="<? echo home_url(add_query_arg(array(),$wp->request)); ?>?c=<? echo $value; ?>">
+												<i class="opp_tooltip icon icon-<? echo $value; ?> " 
+													aria-hidden="true" role="presentation" 
+													data-title="<? echo $value;?>"></i>
+											</a>
+										</div>
+									<? } ?>
+								</div>
+								<div class="clearfix visible-xs visible-sm"></div>
+								<div class="col-xs-6 col-md-3 sub-item">
+									<h5>Organisation</h5>
+									<p>
+										<? the_field("organisation"); ?>
+									</p>
+								</div>
+								<div class="col-xs-6 col-md-3 sub-item location">
+									<h5>Location</h5>
+									<a href="http://maps.google.com/maps?z=12&t=m&q=loc:<? echo get_field("location")['lat']; ?>+<? echo get_field("location")['lng']; ?>" target="_blank">
+										<? the_field("location_text"); ?>
+									</a>
+								</div>
+								<div class="col-xs-12 col-md-1 sub-item view">
+									<a href="<? the_field("ivol_link"); ?>" target="_blank" ><span>View</span></a>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			
-			<?php 
-				$prev_activity = get_field('activity');
-				endforeach; 
+				
+				<?php 
+				} // if it's the relevant activity 
+				endforeach; // posts
+				} // activites loop
 			?>
 			
 			
 			<?php wp_reset_postdata(); ?>
 		
 		<?php endif; ?>
-					</div>	
-		</section>
+		</div>
+	</section>
 		
 	
 	<?php wp_reset_postdata(); ?>
