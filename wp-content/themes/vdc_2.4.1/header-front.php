@@ -60,7 +60,8 @@ ga('newTracker.send', 'pageview');
 						<? } else { ?>
 							<span class="blink_me">🔴</span> LIVE SITE
 						<? }
-						if (user_can( $current_user, 'administrator' )) { ?>, logged in as <b>admin</b>, <?php edit_post_link('edit current page', '<span>', '</span>'); ?> <? } ?>
+						if (user_can( $current_user, 'administrator' )) { ?>, logged in as <b>admin</b>, <?php edit_post_link('edit current page', '<span>', '</span>'); ?> <? }  ?>
+						(page id: <? global $post; echo $post->ID; ?> )
 					</p>
 				</div>
 			</div>

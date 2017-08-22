@@ -23,6 +23,10 @@
 				</a>
 			<? } ?>
 			
+			<a href="<?php echo get_page_link(2991); ?>?c=location" class="vdc-get-started-link vdc-get-started-link-blue vdc-can-i-volunteer-link-box">
+				<i aria-hidden="true" role="presentation" class="icon icon-by-location"></i>
+				<p>By Location</p>
+			</a>
 			
 
 		</div>
