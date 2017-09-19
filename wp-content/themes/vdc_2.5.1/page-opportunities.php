@@ -189,9 +189,13 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 								</div>
 								<div class="col-xs-6 col-md-3 sub-item location">
 									<h5>Location</h5>
-									<a href="http://maps.google.com/maps?z=12&t=m&q=loc:<? echo get_field("location")['lat']; ?>+<? echo get_field("location")['lng']; ?>" target="_blank">
-										<? the_field("location_text"); ?>
-									</a>
+									<? if(get_field("location")['lat'] && get_field("location")['lng']){ ?>
+										<a href="http://maps.google.com/maps?z=12&t=m&q=loc:<? echo get_field("location")['lat']; ?>+<? echo get_field("location")['lng']; ?>" target="_blank">
+											<? the_field("location_text"); ?>
+										</a>
+									<? } else { ?>
+										<p><? the_field("location_text"); ?></p>
+									<? } ?>
 								</div>
 								<div class="col-xs-12 col-md-1 sub-item view">
 									<a href="<? the_field("ivol_link"); ?>" target="_blank" ><span>View</span></a>
