@@ -6,7 +6,7 @@ calendar {
 	float: left;
 	display: block;
 	box-sizing: border-box;
-			-moz-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	background: white;
 	width: 100%;
 	border: solid 3px $blue;
@@ -16,22 +16,32 @@ calendar {
 	div {
 		&.header {
 			text-align: center;
-					font-size: 2.5rem;
-					position: relative;
+			font-size: 2.5rem;
+			position: relative;
 			padding-bottom: 20px;
 			border-bottom: 1px solid lightgrey;
 			margin-bottom: 20px;
-					i {
-						font-size: 3.5rem;
-						&.fa-angle-left {
-							position: absolute;
-							left: 10%;
-						}
-						&.fa-angle-right {
-							position: absolute;
-							right: 10%;
-						}
-					}
+			
+			i {
+				font-size: 3.5rem;
+				&.fa-angle-left{
+					position: absolute;
+					left: 10%;
+				}
+				&.fa-angle-right{
+					position: absolute;
+					right: 10%;
+				}
+			}
+			
+			.icon-arrow-left {
+				position: absolute;
+				left: 10%;
+			}
+			.icon-arrow-right {
+				position: absolute;
+				right: 10%;
+			}
 		}
 		&.week {
 			float: left;
