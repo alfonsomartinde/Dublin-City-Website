@@ -19,25 +19,25 @@
   ga('create', 'UA-19209293-2', 'auto');
   ga('send', 'pageview');
 // WEBBIZ
-ga('create', 'UA-82657092-1', 'auto', {'name': 'newTracker'});	 
+ga('create', 'UA-82657092-1', 'auto', {'name': 'newTracker'});
 ga('newTracker.send', 'pageview');
 </script>
 
-		
+
 		<? // show the ADMIN info
 			$current_user = wp_get_current_user();
-			
+
 			$whitelist = array(
 				'127.0.0.1',
 				'localhost'
-			); 
-			
+			);
+
 			$is_local = false;
 			if(in_array($_SERVER['SERVER_NAME'], $whitelist)){ $is_local = true; }
-			
+
 			$WP_admin_loggedin = false;
 			if (user_can( $current_user, 'administrator' )) { $WP_admin_loggedin = true; }
-			
+
 			if($WP_admin_loggedin){ ?>
 				<link rel="stylesheet" type="text/css" href="<? echo get_stylesheet_directory_uri(). '/dev.css' ?>">
 			<? }
@@ -45,37 +45,38 @@ ga('newTracker.send', 'pageview');
 
 		<?php wp_head(); ?>
 	</head>
-	<?php 
+	<?php
 	// Vars
 		$bg_img = get_field('fall_back_background_image', 'options');
 	?>
-	<body class="home bck_img" style="background-image:url(<?php echo $bg_img['url'] ?>)" <?php body_class('animated fadeIn'); ?>>
-		
+	<body class="home bck_img" style="background-image:url(<?php echo $bg_img['url'] ?>)" data-img="<?php echo $bg_img['url'] ?>" <?php body_class('animated fadeIn'); ?>>
+
 		<? if($WP_admin_loggedin){ ?>
 			<div class="dev_message_container">
 				<div class="dev_message">
 					<p>
 						<? if($is_local){ ?>
-							👍 local site 
+							👍 local site
 						<? } else { ?>
 							<span class="blink_me">🔴</span> LIVE SITE
-						<? } 
-						if (user_can( $current_user, 'administrator' )) { ?>, logged in as <b>admin</b>, <?php edit_post_link('edit current page', '<span>', '</span>'); ?> <? } ?>
+						<? }
+						if (user_can( $current_user, 'administrator' )) { ?>, logged in as <b>admin</b>, <?php edit_post_link('edit current page', '<span>', '</span>'); ?> <? }  ?>
+						(page id: <? global $post; echo $post->ID; ?> )
 					</p>
 				</div>
 			</div>
 		<? } ?>
-		
+
 		<main class="vdc-tint-b-p">
-		
+
 	<!-- angular test
 	<div >
-		
+
 		<input type="text" ng-model="name">
 		<p>Hello {{name}}</p>
 
-	</div> --> 
-			
-			
-		
-		
+	</div> -->
+
+
+
+
