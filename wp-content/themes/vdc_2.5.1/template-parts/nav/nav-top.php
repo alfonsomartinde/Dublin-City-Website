@@ -36,14 +36,14 @@ if ( ( $parent_page == "vol" ) && ( $page_id != 4 ) ) {
 
 } else {
 
-	$nav_class = 'vol';
+	$nav_class = 'null';
 	$bredcrum_class = '';
 
 }
 ?>
 <!-- Desktop -->
 <div class="stack-context visible-lg">
-	<nav id="<?php echo !empty( $parent_page ) ? $parent_page : 'no-cookie'; ?>" class=" <?php echo $nav_class ?>">
+	<nav id="<?php echo !empty( $parent_page ) ? $parent_page : 'no-cookie'; ?>" class="<?php echo $nav_class ?>">
 		<div class="container vdc-top-nav">
 			<div class="vdc-menu-logo">
 				<?php get_template_part( 'template-parts/nav/nav', 'logo' ); ?>

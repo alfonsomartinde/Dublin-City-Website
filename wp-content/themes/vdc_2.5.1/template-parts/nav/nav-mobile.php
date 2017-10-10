@@ -8,8 +8,11 @@
 	if($parent == 4){
 		$section = "vol"; }
 
-	if($parent == 6){
+	else if($parent == 6){
 		$section = "org"; }
+		
+	else {
+		$section = "null"; }
 ?>
 <!-- <h1><? echo $parent; ?>, section: <? echo $section ?></h1> -->
 <div class="mobile-nav hidden-lg <?php echo $section; ?>">
@@ -19,7 +22,9 @@
 			$logo_color = get_field('mobile_logo_color', 'options');
 		?>
 
-		<a href="<?php echo esc_url( home_url() ); ?>"><img class="show logo" src="<?php echo $logo_white['url'] ?>" alt="<?php echo $logo_white['alt'] ?>"></a>
+		<a href="<?php echo esc_url( home_url() ); ?>" class="logo_out">
+			<img class="show logo" src="<?php echo $logo_white['url'] ?>" alt="<?php echo $logo_white['alt'] ?>">
+		</a>
 		<img class="hidden logo" src="<?php echo $logo_color['url'] ?>" alt="<?php echo $logo_color['alt'] ?>">
 
 		<div class="vdc-mobile-header-btns">
