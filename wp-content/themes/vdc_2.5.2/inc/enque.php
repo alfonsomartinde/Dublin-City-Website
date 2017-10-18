@@ -42,7 +42,19 @@ function wbstarter_scripts() {
 	wp_enqueue_script( 'recur_js', get_template_directory_uri() . '/app/lib/moment-recur.min.js', array( 'moment_js'), '1.0', false );
 	wp_enqueue_script( 'ngScripts', get_template_directory_uri() . '/app/js/app.js', array( 'angular_route_js'), '1.0', false );
 	wp_enqueue_script( 'ngControllers', get_template_directory_uri() . '/app/js/controllers.js', array('ngScripts'), '1.0', false );
-	wp_localize_script( 'ngScripts', 'appInfo', array());
+	wp_localize_script( 'ngScripts', 'appInfo',
+		array(
+			'api_url'			 	=> home_url() . '/' .rest_get_url_prefix() . '/wp/v2/',
+			'custom_api_url'		=> home_url() . '/' .rest_get_url_prefix() . '/count-posts/v1/count',
+			'template_directory' 	=> get_template_directory_uri() . '/',
+			'nonce'				 	=> wp_create_nonce( 'wp_rest' ),
+			'is_admin'			 	=> current_user_can('administrator'),
+			'opps_titles'			=> acf_data_access('field_577cb498beb71'),
+			'post_type_count'		=> wb_count_posts_1(),
+			'vdc_categories'		=> acf_data_access('field_577cc6251f784'),
+			'locations'				=> acf_data_access('field_577cf7b21b4ef')
+		)
+	);
 
 	// Common Module
 	wp_enqueue_script( 'commonModule', get_template_directory_uri() . '/app/js/common/common.module.js', array( 'lodash', 'jquery', 'angular_js'), '1.0', false );
