@@ -37,6 +37,8 @@
   position: relative;
 }
 
+
+
 .hamburger-inner {
   display: block;
   top: 50%;
@@ -47,12 +49,16 @@
   &::after {
     width: $hamburger-layer-width;
     height: $hamburger-layer-height;
-    background-color: $hamburger-layer-color;
     border-radius: $hamburger-layer-border-radius;
     position: absolute;
     transition-property: transform;
     transition-duration: 0.15s;
     transition-timing-function: ease;
+    
+    background-color: #999;
+    .org &, .vol &{
+      background-color: $hamburger-layer-color;
+    }
   }
 
   &::before,

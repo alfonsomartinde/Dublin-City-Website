@@ -11,14 +11,12 @@ nav {
 	}
 	&.vol {
 		background: $blue;
-		height: 104px;
 		.vdc-top-nav .vdc-menu-blocks .vdc-specific-menu ul {
 			border-bottom: none;
 		}
 	}
 	&.org {
 		background: $purple;
-		height: 104px;
 		.vdc-top-nav .vdc-menu-blocks .vdc-specific-menu ul {
 			border-bottom: none;
 		}
@@ -29,6 +27,52 @@ nav {
 		color: $white;
 		cursor: pointer;
 	}
+	
+	&.null {
+		background: $white;
+		border-bottom: 1px solid #ccc;
+		a {
+			color: $charcole;
+		}
+		
+		.sub-menu{
+			// filter: drop-shadow(0 .5em 1em gray);
+			box-shadow: 0 .5em .5em 0 rgba(0, 0, 0, .5);
+			border: 1px solid #ccc;
+			
+		}
+		
+		.vdc-menu-logo{
+			// filter: brightness(70%) invert(100%) ;
+			background-image: url(img/VDC_logo@2.png);
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 392px 70px;
+			img{
+				opacity: 0;
+			}
+		}
+		.vdc-top-nav{ 
+			.vdc-general-menu, .vdc-specific-menu{
+				ul.top-menu a{
+					color: $submenu;
+				}
+			}
+		}
+		
+		.vdc-top-nav .vdc-menu-blocks .vdc-specific-menu ul {
+			border-bottom: none;
+		}
+		
+		.vdc-specific-menu ul, .vdc-general-menu ul {
+			li.menu-item-has-children {
+				&:before {
+					filter: drop-shadow(0 -1px 0em #ccc);
+				}
+			}
+		}
+	}
+	
 	// Main Block
 	.vdc-top-nav {
 		display: flex;
@@ -165,6 +209,7 @@ nav {
 					bottom: -.5em;
 					left: 3.5rem;
 					margin-left: -5px;
+					z-index: 11;
 					width: 0;
 					height: 0;
 					border-left: 10px solid transparent;
