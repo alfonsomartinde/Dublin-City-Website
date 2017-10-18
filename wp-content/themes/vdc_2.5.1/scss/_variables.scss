@@ -9,17 +9,73 @@ $headerSize: 5rem, 3rem, 2.5rem, 2rem, 1.8rem, 1.6rem;
 $headerWeight: 200, 400, 400, 300, 600, 400;
 
 // Colors
-$white:				#ffffff;
-$black:				#000000;
+$white:				#fff;
+.t_white{color: $white}
+
+$black:				#000;
+.t_black{color: $black}
+
 $charcole:		#3C3C3B;
+.t_charcole{color: $charcole}
+
 $pink:				#e00d7b;
+.t_pink{color: $pink}
+
 $lightPink:		lighten(#e00d7b, 10%);
+.t_lightPink{color: $lightPink}
+
 $purple:			#642263;
+.t_purple{color: $purple}
+
 $lightPurple:	#9F237C;
+.t_lightPurple{color: $lightPurple}
+
 $blue:				#252e68;
+.t_blue{color: $blue}
+
 $lightBlue:		#61A3D2;
+.t_lightBlue{color: $lightBlue}
+
 $lighterBlue:	#243E83;
+.t_lighterBlue{color: $lighterBlue}
+
 $grey:				#e6e6e6;
+.t_grey{color: $grey}
+
 $submenu:			#9A9999;
+.t_submenu{color: $submenu}
+
 $deleteme:		#ddd333;
+.t_deleteme{color: $deleteme}
+
 $oppsbg:			#f3f3f3;
+.t_oppsbg{color: $oppsbg}
+
+
+
+
+
+
+.t_1{font-size: 1em}
+.t_1-25{font-size: 1.25em}
+.t_1-5{font-size: 1.5em}
+.t_1-75{font-size: 1.75em}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
