@@ -64,6 +64,20 @@
 	}
 }
 
+
+.mobile-nav.null{
+	.logo_out{
+		.logo {
+			opacity: 0
+		}
+		
+		background-image: url(img/VDC_monogram@2.png);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 40px auto;
+	}
+}
+
 .mob-events-blog {
 	margin: 3rem 0 0;
 	.link-wrapper {
