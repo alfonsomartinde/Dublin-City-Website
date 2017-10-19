@@ -69,11 +69,11 @@ if($parent == 6){
 						<?php  } else { ?>
 							<span class="blink_me">🔴</span> LIVE SITE
 						<?php  }
-						if (user_can( $current_user, 'administrator' )) { ?>, logged in as <b>admin</b>, <?php edit_post_link('edit current page', '<span>', '</span>'); ?> <? } ?>
+						if (user_can( $current_user, 'administrator' )) { ?>, logged in as <b>admin</b>, <?php edit_post_link('edit current page', '<span>', '</span>'); ?> <?php } ?>
 					</p>
 				</div>
 			</div>
-		<? } ?>
+		<?php } ?>
 		<?php
 		// Vars
 			$bg_img_bkup = get_field('fall_back_background_image', 'options');
