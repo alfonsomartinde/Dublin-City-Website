@@ -34,6 +34,8 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 				$requesting = 'cat';
 			} elseif ($_GET['l']) {
 				$requesting = 'loc';
+			} elseif ($_GET['d']) {
+				$requesting = 'date';
 			}
 			
 			
@@ -66,6 +68,8 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 				'orderby'			=> 'activity',
 				'order'				=> 'ASC',
 			);
+		} elseif ($requesting == 'date') {
+			$current_opp_activity = "Date";
 		} else { 
 			$current_opp_activity = "Latest";
 			
@@ -253,6 +257,10 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 					Dublin Wide </a>
 
 			</div>
+		<? } ?>
+		<? if ($requesting == 'date') { ?>
+			<calendar></calendar>
+			<opps-list></opps-list>
 		<? } ?>
 		</div>
 	</section>

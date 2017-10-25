@@ -27,7 +27,12 @@
 				<i aria-hidden="true" role="presentation" class="icon icon-by-location"></i>
 				<p>By Location</p>
 			</a>
-			
+
+
+			<a href="<?php echo get_page_link(2991); ?>?d=null" class="vdc-get-started-link vdc-get-started-link-blue vdc-can-i-volunteer-link-box">
+				<i aria-hidden="true" role="presentation" class="icon icon-event-calendar"></i>
+				<p>By Date</p>
+			</a>
 
 		</div>
 	</div>
