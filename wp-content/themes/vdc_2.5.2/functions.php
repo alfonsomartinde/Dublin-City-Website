@@ -196,12 +196,12 @@ meta_query[1][value]=2017-10-12&
 meta_query[1][compare]==&
 meta_query[1][type]=DATE
 
-http://localhost/vdc/wp-json/wp/v2/opps-api?&meta_query[0][key]=from_date&meta_query[0][value][0]=2017-10-10&meta_query[0][value][1]=2017-10-13&meta_query[0][compare]=BETWEEN&meta_query[0][type]=DATE
+http://localhost/vdc/wp-json/wp/v2/opps-api?&meta_query[0][key]=from_date&meta_query[0][value][0]=2017-10-01&meta_query[0][value][1]=2017-11-31&meta_query[0][compare]=BETWEEN&meta_query[0][type]=DATE
 
 /wp-json/wp/v2/opps-api?
 meta_query[0][key]=from_date&
-meta_query[0][value][0]=2017-10-10&
-meta_query[0][value][1]=2017-10-13&
+meta_query[0][value][0]=2017-10-01&
+meta_query[0][value][1]=2017-11-31&
 meta_query[0][compare]=BETWEEN&
 meta_query[0][type]=DATE
 */
@@ -338,6 +338,9 @@ class Opps_Posts_Controller extends WP_REST_Controller {
     	// Debug
       if ($this->debug === true) {
       	print_r($post);
+        print_r(get_post_custom($post->ID));
+        print_r(get_post_custom($post->ID)['location'][3]);
+        print_r(get_post_custom($post->ID)['organisation']);
       	print_r(get_post_custom($post->ID)['from_date']);
       	print_r(get_post_custom($post->ID)['to_date']);
       }
@@ -418,6 +421,16 @@ class Opps_Posts_Controller extends WP_REST_Controller {
       $post_data['opp_category'] = get_post_meta($post->ID,'opp_category')[0];
     }
 
+    // Checks if field is set in schema.
+    if ( isset( $schema['properties']['custom_fields']['organisation'] ) ) {
+      $post_data['organisation'] = get_post_meta($post->ID,'organisation')[0];
+    }
+
+    // Checks if field is set in schema.
+    if ( isset( $schema['properties']['custom_fields']['location'] ) ) {
+      $post_data['location'] = get_post_meta($post->ID,'location')[0];
+    }
+
     return rest_ensure_response( $post_data );
     // return new WP_REST_Response( $post_data, 200 );
   }
@@ -491,6 +504,18 @@ class Opps_Posts_Controller extends WP_REST_Controller {
           ),
           'opp_category' => array(
             'description'  => esc_html__( 'The categories of that opportunity. Only 4 will be shown.' ),
+            'type'         => 'array',
+            'context'      => array( 'view' ),
+            'readonly'     => true,
+          ),
+          'organisation' => array(
+            'description'  => esc_html__( 'The organisation of that opportunity.' ),
+            'type'         => 'string',
+            'context'      => array( 'view' ),
+            'readonly'     => true,
+          ),
+          'location' => array(
+            'description'  => esc_html__( 'The location of that opportunity.' ),
             'type'         => 'array',
             'context'      => array( 'view' ),
             'readonly'     => true,
