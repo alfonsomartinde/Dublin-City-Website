@@ -84,10 +84,41 @@ if ($parent_page == "org") {
 				<?php 
 					// temp conditional call to load the MAnaging Volunteers section on the front page
 					
+					// if ($parent_page == "org") {
+					// 	$post_args = array(
+					// 		'post_type' => 'managing-volunteers', 
+					// 		'posts_per_page' => 2
+					// 	);
+					// } else {
+					// 	$post_args = array(
+					// 		'post_type' => 'post', 
+					// 		'posts_per_page' => 2
+					// 	);
+					// }
+					
 					if ($parent_page == "org") {
 						$post_args = array(
-							'post_type' => 'managing-volunteers', 
-							'posts_per_page' => 2
+							'post_type' => 'post', 
+							'posts_per_page' => 2,
+							'meta_query' => array(
+								array(
+									'key' => 'post_type_org',
+									'compare' => '==',
+									'value' => '1'
+								)
+							)
+						);
+					} if ($parent_page == "vol") {
+						$post_args = array(
+							'post_type' => 'post', 
+							'posts_per_page' => 2,
+							'meta_query' => array(
+								array(
+									'key' => 'post_type_vol',
+									'compare' => '==',
+									'value' => '1'
+								)
+							)
 						);
 					} else {
 						$post_args = array(

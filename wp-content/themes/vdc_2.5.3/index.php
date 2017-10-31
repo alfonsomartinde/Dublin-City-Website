@@ -3,7 +3,14 @@
 		$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 		$args = array(
 		  'posts_per_page' => 9,
-		  'paged'          => $paged
+		  'paged'          => $paged,
+		  'meta_query' => array(
+				array(
+					'key' => 'post_type_gen',
+					'compare' => '==',
+					'value' => '1'
+				)
+			)
 		);
 
 		$query = new WP_Query( $args ); 
