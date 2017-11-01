@@ -1,7 +1,6 @@
 <div class="opportunities" ng-if="opps.length > 0">
   <div class="opps-item" ng-repeat="opp in opps track by $index">
     <div class="row opportunity-item">
-
       <div class="col-xs-6 col-md-3 sub-item">
         <h5>Opportunity</h5>
         <p>
@@ -9,9 +8,16 @@
         </p>
       </div>
       <div class="col-xs-6 col-md-2 sub-item">
-        <div class="col-xs-6 col-sm-3 col-md-6 opp_out">
-          <a class="opp_category" aira-label="{{opp.opp_category}}" href="http://localhost:8888/vol/dublin-opp/opportunities-?c={{opp.opp_category}}">
-            <i class="opp_tooltip icon icon-{{opp.opp_category}} " aria-hidden="true" role="presentation" data-title="{{opp.opp_category}}"></i>
+        <div ng-repeat="category in opp.opp_categories track by $index"
+          class="col-xs-6 col-sm-3 col-md-6 opp_out">
+          <a class="opp_category"
+            aira-label="{{category}}"
+            href="{{baseUrl}}/vol/dublin-opp/opportunities/?c={{category}}">
+            <i class="opp_tooltip icon icon-{{category}}"
+              aria-hidden="true"
+              role="presentation"
+              data-title="{{category}}">
+            </i>
           </a>
         </div>
       </div>
@@ -24,12 +30,25 @@
       </div>
       <div class="col-xs-6 col-md-3 sub-item location">
         <h5>Location</h5>
-        <a href="http://maps.google.com/maps?z=12&amp;t=m&amp;q=loc:{{opp.location.lat}}+{{opp.location.lng}}" target="_blank">
-          {{opp.location.address}}
+        <a ng-if="opp.location.lat !== '' && opp.location.lng !== ''"
+          href="http://maps.google.com/maps?z=12&amp;t=m&amp;q=loc:{{opp.location.lat}}+{{opp.location.lng}}"
+          target="_blank">
+          <span>
+            {{opp.location.address}}
+          </span>
         </a>
+        <span ng-if="!(opp.location.lat !== '' && opp.location.lng !== '')">
+          {{opp.location.address}}
+        </span>
       </div>
       <div class="col-xs-12 col-md-1 sub-item view">
-        <a href="http://waitbutwhy.com/" target="_blank"><span>View</span></a>
+        <a ng-if="opp.ivol_link !== ''"
+          href="{{opp.ivol_link}}"
+          target="_blank"
+          aira-label="Opens new window"
+          title="Opens new window">
+          <span>View</span>
+        </a>
       </div>
     </div>
   </div>

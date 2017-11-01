@@ -417,8 +417,8 @@ class Opps_Posts_Controller extends WP_REST_Controller {
     }
 
     // Checks if field is set in schema.
-    if ( isset( $schema['properties']['custom_fields']['opp_category'] ) ) {
-      $post_data['opp_category'] = get_post_meta($post->ID,'opp_category')[0];
+    if ( isset( $schema['properties']['custom_fields']['opp_categories'] ) ) {
+      $post_data['opp_categories'] = get_post_meta($post->ID,'opp_category')[0];
     }
 
     // Checks if field is set in schema.
@@ -429,6 +429,11 @@ class Opps_Posts_Controller extends WP_REST_Controller {
     // Checks if field is set in schema.
     if ( isset( $schema['properties']['custom_fields']['location'] ) ) {
       $post_data['location'] = get_post_meta($post->ID,'location')[0];
+    }
+
+    // Checks if field is set in schema.
+    if ( isset( $schema['properties']['custom_fields']['ivol_link'] ) ) {
+      $post_data['ivol_link'] = get_post_meta($post->ID,'ivol_link')[0];
     }
 
     return rest_ensure_response( $post_data );
@@ -502,7 +507,7 @@ class Opps_Posts_Controller extends WP_REST_Controller {
             'context'      => array( 'view' ),
             'readonly'     => true,
           ),
-          'opp_category' => array(
+          'opp_categories' => array(
             'description'  => esc_html__( 'The categories of that opportunity. Only 4 will be shown.' ),
             'type'         => 'array',
             'context'      => array( 'view' ),
@@ -516,7 +521,13 @@ class Opps_Posts_Controller extends WP_REST_Controller {
           ),
           'location' => array(
             'description'  => esc_html__( 'The location of that opportunity.' ),
-            'type'         => 'array',
+            'type'         => 'object',
+            'context'      => array( 'view' ),
+            'readonly'     => true,
+          ),
+          'ivol_link' => array(
+            'description'  => esc_html__( 'The iVol link of that opportunity.' ),
+            'type'         => 'string',
             'context'      => array( 'view' ),
             'readonly'     => true,
           ),

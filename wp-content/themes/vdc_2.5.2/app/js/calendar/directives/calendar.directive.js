@@ -8,23 +8,6 @@ angular.module('calendar')
 ){
   'use strict';
 
-  var today       = new Date();
-  var todayMonth  = today.getMonth();
-  var todayYear   = today.getFullYear();
-
-  /**
-   * Initialisation stuff
-   *
-   * @param {object} $scope: The current $scope object
-   * @return {undefined}
-   */
-  function init($scope) {
-    $scope.dayNames = calendarSrv.getDayNames();
-    $scope.weeks    = calendarSrv.getWeeksInMonth(todayMonth, todayYear, 'monday');
-    $scope.selected = '';
-    $scope.today    = today;
-  }
-
   return {
     restrict: 'E',
     templateUrl: constants.template_directory +
@@ -33,6 +16,12 @@ angular.module('calendar')
     replace: false,
     scope: {},
     controller: function controller($scope) {
+
+      var currMonth;
+      var currYear;
+      var today       = new Date();
+      var todayMonth  = today.getMonth();
+      var todayYear   = today.getFullYear();
 
       /**
        * Transforms "YYYY-mm-DD HH:mm:ss" into Date object: new Date()
@@ -54,7 +43,7 @@ angular.module('calendar')
         return _.flatten(days);
       }
 
-      function getEventsPerDay() {
+      function populateEventsPerDay() {
         $scope.days = getAllDays();
 
         _.each($scope.days, function(day){
@@ -78,45 +67,87 @@ angular.module('calendar')
       }
 
       /**
-       * @TODO
-       * Handle Ajax errors
+       * Callback to be executed when server sends an error response
+       *
+       * @param {object} reason - The reason of the error
        */
       function getAllPostInMonthError(reason) {
 
       }
 
+      /**
+       * Callback to be executed when server sends a success response
+       *
+       * @param {object} response - The response from server
+       */
       function getAllPostInMonthSuccess(response) {
         $scope.opps = response;
-        getEventsPerDay();
+        populateEventsPerDay();
         $rootScope.$emit('oppsLoaded', response);
       }
 
-      function getAllPostWithinCurrentMonth() {
-        var date = new Date(),
-          y = date.getFullYear(),
-          m = date.getMonth();
-        var firstDay = new Date(y, m, 1);
-        var lastDay = new Date(y, m + 1, 0);
+      function getAllPostWithinMonth() {
+        var firstDay = new Date(currYear, currMonth, 1);
+        var lastDay = new Date(currYear, currMonth + 1, 0);
         var request = oppsSrv.buildRequest(firstDay, lastDay);
 
         oppsSrv
           .getPosts(request)
-          .then(getAllPostInMonthSuccess , getAllPostInMonthError);
+          .then(getAllPostInMonthSuccess, getAllPostInMonthError);
       }
 
-      // $scope.next     = _.noop;
-      // $scope.previous = _.noop;
-      $scope.next     = function next(){};
-      $scope.previous = function previous(){};
+      /**
+       * Initialisation depending on passed day
+       *
+       * @param {number} month: (Optional) The month number to initialise the calendar
+       * @param {number} year: (Optional) The year number to initialise the calendar
+       * @return {undefined}
+       */
+      function init(month, year) {
+        currMonth = _.isNumber(month) ? month : todayMonth;
+        currYear  = _.isNumber(year) ? year : todayYear;
 
-      $scope.unselectAllDays = function unselectAllDays() {
+        // API
+        $scope.dayNames = calendarSrv.getDayNames();
+        $scope.selected = '';
+        $scope.today    = today;
+        $scope.firstDay = new Date(currYear, currMonth);
+        $scope.weeks    = calendarSrv.getWeeksInMonth(currMonth, currYear, 'monday');
+
+        getAllPostWithinMonth();
+      }
+
+      function nextMonth(){
+        currMonth++;
+        if (currMonth === 12) {
+          currMonth = 0;
+          currYear++;
+        }
+        init(currMonth,currYear);
+      }
+
+      function previousMonth(){
+        currMonth--;
+        if (currMonth === -1) {
+          currMonth = 11;
+          currYear--;
+        }
+        init(currMonth,currYear);
+      }
+
+      function unselectAllDays() {
         _.each($scope.weeks, function eachWeek(week){
           _.map(week.days, daySrv.unselect);
         });
-      };
+      }
 
-      init($scope);
-      getAllPostWithinCurrentMonth();
+      // Initialisation
+      init(todayMonth, todayYear);
+
+      // API
+      $scope.next = nextMonth;
+      $scope.previous = previousMonth;
+      $scope.unselectAllDays = unselectAllDays;
     },
     link: function link(){
 

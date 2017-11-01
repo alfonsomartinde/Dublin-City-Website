@@ -5,10 +5,6 @@ angular.module('opps')
 ){
   'use strict';
 
-  function init($scope) {
-    $scope.opps = [];
-  }
-
   return {
     restrict: 'E',
     templateUrl: constants.template_directory +
@@ -21,7 +17,17 @@ angular.module('opps')
         $scope.opps = response;
       }
 
-      init($scope);
+      function populateConstants() {
+        $scope.baseUrl = constants.api;
+      }
+
+      function init() {
+        $scope.opps = [];
+      }
+
+      // Initialisation
+      populateConstants();
+      init();
 
       $rootScope.$on('oppsLoaded', onOppsLoaded)
     },
