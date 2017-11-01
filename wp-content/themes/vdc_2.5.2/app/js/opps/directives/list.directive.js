@@ -29,7 +29,7 @@ angular.module('opps')
       populateConstants();
       init();
 
-      $rootScope.$on('oppsLoaded', onOppsLoaded)
+      $rootScope.$on('oppsLoaded', onOppsLoaded);
     },
     link: function(){
 

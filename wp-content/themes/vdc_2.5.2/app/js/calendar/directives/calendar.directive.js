@@ -66,6 +66,12 @@ angular.module('calendar')
         });
       }
 
+      function getTodayEvents() {
+        return todayMonth === currMonth ?
+          oppsSrv.getPostsOnDate($scope.opps, today) :
+          [];
+      }
+
       /**
        * Callback to be executed when server sends an error response
        *
@@ -83,13 +89,22 @@ angular.module('calendar')
       function getAllPostInMonthSuccess(response) {
         $scope.opps = response;
         populateEventsPerDay();
-        $rootScope.$emit('oppsLoaded', response);
+
+        // Populate the whole month in opp list.
+        // $rootScope.$emit('oppsLoaded', response);
+
+        // Populate just the current day in opp list.
+        $rootScope.$emit('oppsLoaded', getTodayEvents());
       }
 
       function getAllPostWithinMonth() {
-        var firstDay = new Date(currYear, currMonth, 1);
-        var lastDay = new Date(currYear, currMonth + 1, 0);
-        var request = oppsSrv.buildRequest(firstDay, lastDay);
+        var firstWeek    = _.first($scope.weeks);
+        var firstDay     = _.first(firstWeek.days);
+        var lastWeek     = _.last($scope.weeks);
+        var lastDay      = _.last(lastWeek.days);
+        var firstDayDate = firstDay && firstDay.date || new Date(currYear, currMonth, 1);
+        var lastDayDate  = lastDay && lastDay.date || new Date(currYear, currMonth + 1, 0);
+        var request      = oppsSrv.buildRequest(firstDayDate, lastDayDate);
 
         oppsSrv
           .getPosts(request)

@@ -6,25 +6,6 @@ angular.module('opps')
   'use strict';
 
   /**
-   * @TODO return string depending on format parameter
-   *
-   * @param {date} date - date to transform
-   * @param {string} format - The output format
-   * @return {string} - The formated date
-   */
-  function formatDate(date, format) {
-    var year = date.getFullYear();
-    var month = date.getMonth();
-    var day = date.getDay();
-
-    if (year === '' || month === '' || day === '') {
-      return '';
-    }
-
-    return year + '-' + month + '-' + day;
-  }
-
-  /**
    * Builds the request object used in calendarDaoSrv
    *
    * @usage:
@@ -47,7 +28,6 @@ angular.module('opps')
    */
   function buildRequest(dateStart, dateEnd) {
     var request;
-    // var dateStartFormated = dateStart && formatDate(dateStart, 'Y-m-d');
     var dateStartFormated = dateStart && $filter('date')(dateStart, 'yyyy-MM-dd');
     var dateEndFormated = dateEnd && $filter('date')(dateEnd, 'yyyy-MM-dd');
 
@@ -76,6 +56,21 @@ angular.module('opps')
     return request;
   }
 
+  /**
+   * Returns the opps matching the given date
+   *
+   * @param {array} opps
+   * @param {date} date
+   * @return {array} - the opportunities for that particular date
+   */
+  function getPostsOnDate(opps, date) {
+    return _.filter(opps, function(opp){
+      var oppFromDate = new Date(Date.parse(opp.from_date));
+      var oppToDate = new Date(Date.parse(opp.to_date));
+      return date <= oppToDate && date >= oppFromDate;
+    });
+  }
+
   function getPosts(request) {
     return oppsDaoSrv.getPosts(request);
   }
@@ -83,6 +78,7 @@ angular.module('opps')
   // Public API
   return {
     'buildRequest': buildRequest,
+    'getPostsOnDate': getPostsOnDate,
     'getPosts': getPosts
   };
 });
