@@ -1,13 +1,7 @@
-
-
-<!-- can't delete this for some reason? -->
-  {{opp.id}}, 
-
-
 <div class="opportunities" ng-if="opps.length > 0">
   <div class="opps-item" ng-repeat="opp in opps track by $index">
     <div class="row opportunity-item">
-      
+
       <div class="col-xs-6 col-md-3 sub-item">
         <h5>Opportunity</h5>
         <p>
@@ -25,13 +19,13 @@
       <div class="col-xs-6 col-md-3 sub-item">
         <h5>Organisation</h5>
         <p>
-          Fake Organisation With A Long Name                  
+          {{opp.organisation}}
         </p>
       </div>
       <div class="col-xs-6 col-md-3 sub-item location">
         <h5>Location</h5>
-        <a href="http://maps.google.com/maps?z=12&amp;t=m&amp;q=loc:53.34521746177818+-6.258645057678223" target="_blank">
-          123 Fake Street, Dublin 1
+        <a href="http://maps.google.com/maps?z=12&amp;t=m&amp;q=loc:{{opp.location.lat}}+{{opp.location.lng}}" target="_blank">
+          {{opp.location.address}}
         </a>
       </div>
       <div class="col-xs-12 col-md-1 sub-item view">
