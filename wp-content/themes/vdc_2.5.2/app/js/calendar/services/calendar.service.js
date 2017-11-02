@@ -14,6 +14,7 @@ angular.module('calendar')
         'number': i,
         'date': date,
         'isToday': date.setHours(0,0,0,0) === today.setHours(0,0,0,0),
+        'isSelected': false,
         'isCurrentMonth': date.getMonth() === today.getMonth()
       }));
     }
@@ -26,10 +27,10 @@ angular.module('calendar')
   }
 
   /**
-   * Populates a week with days from previous month
+   * Populates first week of current month with days from previous month
    *
    *                 [01, 02, 03]  <- currWeekDays (week passed as argument)
-   * [28, 29, 30, 31]              <- populatedDays
+   * [28, 29, 30, 31]              <- populatedDays form previous month
    * [28, 29, 30, 31, 01, 02, 03]  <- finalWeek
    *
    * @param {array} week - the week to be populated with days from prev month
@@ -37,11 +38,10 @@ angular.module('calendar')
    */
   function populateFirstWeek(week) {
     var i, date, number;
-
     var populatedDays = [];
-    var currWeekDays  = week.days;
+    var currWeekDays = week.days;
     var firstCurrWeekDayObj = _.first(currWeekDays);
-    var daysToPopulate   = 7 - currWeekDays.length;
+    var daysToPopulate = 7 - currWeekDays.length;
 
     for (i = daysToPopulate; i > 0; i--) {
       date = daySrv.getDateFrom(firstCurrWeekDayObj, i);
@@ -49,29 +49,52 @@ angular.module('calendar')
 
       populatedDays.push(daySrv.setDayObj({
         'number': number,
-        'date': date
+        'date': date,
+        'isToday': false,
+        'isSelected': false,
+        'isCurrentMonth': false
       }));
     }
 
     return _.concat(populatedDays, currWeekDays);
   }
 
-  // @TODO
-  // Populate days from next month depending on days.length
-  // if days.length === 7, then week is full. No population needed.
-  // if days.length === 6, then week needs 1 day from next. month.
-  // if days.length === 5, then week needs 2 days from next. month.
-  // ...
-  // if days.length === 1, then week needs 6 days from next. month.
+  /**
+   * Populates last week of current month with days from next month
+   *
+   * [28, 29, 30, 31]              <- currWeekDays (week passed as argument)
+   *                 [01, 02, 03]  <- populatedDays from next month
+   * [28, 29, 30, 31, 01, 02, 03]  <- finalWeek
+   *
+   * @param {array} week - the week to be populated with days from next month
+   * @return {array} the finalWeek
+   */
   function populateLastWeek(week) {
-    var daysL = week.days && week.days.length;
+    var i, date, number;
+    var currWeekDays = week.days;
+    var lastCurrWeekDayObj = _.last(currWeekDays);
+    var daysToPopulate = 7 - currWeekDays.length;
+
+    for (i = 1; i <= daysToPopulate; i++) {
+      date = daySrv.getDateFrom(lastCurrWeekDayObj, -i);
+      number = date.getDate();
+
+      currWeekDays.push(daySrv.setDayObj({
+        'number': number,
+        'date': date,
+        'isToday': false,
+        'isSelected': false,
+        'isCurrentMonth': false
+      }));
+    }
+
+    // return _.concat(populatedDays, currWeekDays);
+    return currWeekDays;
   }
 
   /**
    * Gets an array of weeks with start and end day.
    * Note: month is 0 based, just like Dates in js
-   *
-   *
    *
    * @param {integer} month - Month
    * @param {integer} year - Year
@@ -80,18 +103,17 @@ angular.module('calendar')
   function getWeeksInMonth(month, year, startDay) {
     var weeks = [],
       firstDate = new Date(year, month, 1),
-      lastDate = new Date(year, month + 1, 0),
-      numDays = lastDate.getDate();
-
-    var start = 1;
-    var end = 7 - firstDate.getDay();
+      lastDate  = new Date(year, month + 1, 0),
+      numDays   = lastDate.getDate();
+    var start   = 1;
+    var end     = 7 - firstDate.getDay();
 
     if (startDay === 'monday') {
-        if (firstDate.getDay() === 0) {
-            end = 1;
-        } else {
-            end = 7 - firstDate.getDay() + 1;
-        }
+      if (firstDate.getDay() === 0) {
+        end = 1;
+      } else {
+        end = 7 - firstDate.getDay() + 1;
+      }
     }
 
     while (start <= numDays) {
@@ -106,7 +128,7 @@ angular.module('calendar')
     }
 
     weeks[0].days = populateFirstWeek(_.first(weeks));
-    // weeks[weeks.length - 1] = populateLastWeek(_.last(weeks));
+    weeks[weeks.length - 1].days = populateLastWeek(_.last(weeks));
 
     return weeks;
   }
