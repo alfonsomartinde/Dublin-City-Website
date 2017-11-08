@@ -15,17 +15,17 @@
 			)
 		);
 
-		$query = new WP_Query( $args ); 
-		$count = $query->post_count;
+		$wp_query = new WP_Query( $args ); 
+		$count = $wp_query->post_count;
 	?>
 
 
-	<?php if ( $query->have_posts() ) : ?>
+	<?php if ( $wp_query->have_posts() ) : ?>
 	<div class="container vdc-blog-overview">
 		<h1 class="text-center">Managing Volunteers</h1>
 		<hr style="max-width: 80%;">
 		<div class="row">
-			<?php $i = 1; while ( $query->have_posts() ) : $query->the_post();?>	
+			<?php $i = 1; while ( $wp_query->have_posts() ) : $wp_query->the_post();?>	
 				<div class="col-md-6">
 					<a href="<?php the_permalink(); ?>" <?php post_class(); ?>>
 

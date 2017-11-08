@@ -1,32 +1,37 @@
 <?php get_template_part( 'template-parts/include', 'header' ); ?>
 	<?php 
-		$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+		// $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1; 
+		// $wp_query = new WP_Query( array( 'paged' => $paged ) );
 		$args = array(
 			'post_type' => 'post',
 			'posts_per_page' => 6,
-		 	'paged' => $paged,
-		 	
+			'paged' => $paged,
+			
 			'meta_query' => array(
 				array(
-					'key' => 'post_type_org',
+					'key' => 'post_type_vol',
 					'compare' => '==',
 					'value' => '1'
 				)
 			)
+
 		);
 
-		$query = new WP_Query( $args ); 
-		$count = $query->post_count;
+		$wp_query = new WP_Query( $args ); 
+		$count = $wp_query->post_count;
 	?>
 
-
-	<?php if ( $query->have_posts() ) : ?>
+ 
+	<?php if ( $wp_query->have_posts() ) : ?>
 	<div class="container vdc-blog-overview">
-		<h1 class="text-center">Managing Volunteers</h1>
+		
+		<h1 class="text-center">Volunteering</h1>
+		
 		<hr style="max-width: 80%;">
 		<div class="row">
-			<?php $i = 1; while ( $query->have_posts() ) : $query->the_post();?>	
-				<div class="col-md-6">
+			<?php if ( $wp_query->have_posts() ) : while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
+				<div class="col-md-6 nth-post-fix">
 					<a href="<?php the_permalink(); ?>" <?php post_class(); ?>>
 
 						<h2><?php the_title(); ?></h2>
@@ -44,15 +49,12 @@
 						</div>
 					</a>
 				</div>
-				<?php if ($i % 2 == 0): ?>
-					<div class="clearfix visible-sm-block visible-md-block visible-lg-block"></div>
-					<?php if ($i < $count): ?>
-						<hr>
-					<?php endif ?>
-					
-				<?php endif; ?>		
-
-			<?php $i++; endwhile; ?>
+			<?php endwhile; else: ?>
+				<h1>Sorry...</h1>
+				<p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
+			<?php endif; ?>
+			
+			
 			<?php wp_reset_postdata(); ?>
 		
 		</div>

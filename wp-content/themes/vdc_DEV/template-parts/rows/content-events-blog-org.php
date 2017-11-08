@@ -79,15 +79,53 @@ if ($parent_page == "org") {
 			<div class="col-sm-6 <?php echo ' vdc-' . $class . '-blog'; ?>">
 				<div class="<?php echo 'vdc-' . $class;?>">
 					<h2 class="icon-blog-feed">Blog Feed <span> - Keep up to date</span></h2>
-					<a href="<?php echo esc_url(home_url('/newsblog/news/')); ?>" class="link-arrow-pink">See All</a>
+					
+					<?php if ($parent_page == "vol") { ?> 
+						<a href="<?php echo esc_url(home_url('/newsblog/volunteering/')); ?>" 
+							class="link-arrow-pink">See All</a>
+					<?php } else { ?> 
+						<a href="<?php echo esc_url(home_url('/managing-volunteers/')); ?>" 
+							class="link-arrow-pink">See All</a>
+					<?php } ?>
 				</div>
 				<?php 
 					// temp conditional call to load the MAnaging Volunteers section on the front page
 					
+					// if ($parent_page == "org") {
+					// 	$post_args = array(
+					// 		'post_type' => 'managing-volunteers', 
+					// 		'posts_per_page' => 2
+					// 	);
+					// } else {
+					// 	$post_args = array(
+					// 		'post_type' => 'post', 
+					// 		'posts_per_page' => 2
+					// 	);
+					// }
+					
 					if ($parent_page == "org") {
 						$post_args = array(
-							'post_type' => 'managing-volunteers', 
-							'posts_per_page' => 2
+							'post_type' => 'post', 
+							'posts_per_page' => 2,
+							'meta_query' => array(
+								array(
+									'key' => 'post_type_org',
+									'compare' => '==',
+									'value' => '1'
+								)
+							)
+						);
+					} if ($parent_page == "vol") {
+						$post_args = array(
+							'post_type' => 'post', 
+							'posts_per_page' => 2,
+							'meta_query' => array(
+								array(
+									'key' => 'post_type_vol',
+									'compare' => '==',
+									'value' => '1'
+								)
+							)
 						);
 					} else {
 						$post_args = array(
@@ -197,7 +235,13 @@ if ($parent_page == "org") {
 				</div>
 				<div class="col-xs-4">
 					<div class="link-wrapper">
-						<a href="<?php echo esc_url(home_url('/newsblog/news/')); ?>" class="link-arrow-pink">See All</a>
+						<?php if ($parent_page == "vol") { ?> 
+							<a href="<?php echo esc_url(home_url('/newsblog/volunteering/')); ?>" 
+								class="link-arrow-pink">See All</a>
+						<?php } else { ?> 
+							<a href="<?php echo esc_url(home_url('/managing-volunteers/')); ?>" 
+								class="link-arrow-pink">See All</a>
+						<?php } ?>
 					</div>
 				</div>
 			</div>
