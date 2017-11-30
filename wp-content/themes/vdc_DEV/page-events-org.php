@@ -13,15 +13,7 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 		
 		'meta_key'	=> 'date',
 		'orderby'	=> 'meta_value_num',
-		'order'		=> 'ASC',
-		
-		'meta_query' => array(
-			array(
-				'key'		=> 'date',
-				'compare'	=> '>=',
-				'value'		=> $today,
-			)
-		),
+		'order'		=> 'DESC',
 	);
 	$event_query = new WP_Query( $event_args );
 ?>
@@ -51,21 +43,26 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 				</div>
 				<div class="col-md-8 v-align-p">
 					<a href="<?php echo the_permalink(); ?>" class="title-link">
-						<div class="v-align-child date_component mr2 <?php echo 'date-' . $class;?>">
-							<p>
-								<span>
-									<strong><?php echo $date->format('j');?></strong>
-								</span>
-								<span><?php echo $date->format('M');?></span>
-							</p>
-						</div>
-						
 						<h2 class="inline-block v-align-child mb0 pl1-2">
 							<?php the_title(); ?>
 						</h2>
 					</a>
 					
 					<hr>
+					
+					<p>
+						<i>
+							<strong>
+								<?php echo $date->format('l');?>
+								the 
+								<?php echo $date->format('j');?><?php echo $date->format('S');?>
+								of 
+								<?php echo $date->format('M');?>, 
+								<?php echo $date->format('o');?>
+							</strong>
+						</i>
+					</p>
+					
 					<?php if ( !empty($date_time) ): ?>
 						<i><?php echo $dt_arr[0] . ' the ' . $dt_arr[1] . ' of ' . $dt_arr[2] . ', ' . $dt_arr[3];  ?></i>
 					<?php endif; ?>
