@@ -34,6 +34,8 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 				$requesting = 'cat';
 			} elseif ($_GET['l']) {
 				$requesting = 'loc';
+			} elseif ($_GET['d']) {
+				$requesting = 'date';
 			} else{
 				$requesting = 'latest';
 			}
@@ -68,6 +70,8 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 				'orderby'			=> 'activity',
 				'order'				=> 'ASC',
 			);
+		}  elseif ($requesting == 'date') {
+			$current_opp_activity = "Date";
 		} else { 
 			$current_opp_activity = "Latest";
 			
@@ -78,6 +82,7 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 				'orderby'			=> 'activity',
 				'order'				=> 'ASC',
 				
+				// don't need this as it is calculated in the loop
 				// 'meta_key'		=> 'latest',
 				// 'meta_value'	=> 'true'
 			);
@@ -127,8 +132,8 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 					}
 				}
 				
-				// else ($activity_test == true || $requesting == 'cat') {
-				else {
+				elseif ($activity_test == true || $requesting == 'cat') {
+				// else {
 				?>
 					<span class="icon icon-<? echo $activity; ?> opportunity-title-icon"></span>
 					<h2 class="opportunity-title line-after">
@@ -265,6 +270,10 @@ get_template_part( 'template-parts/include', 'header' ); ?>
 
 			</div>
 		<? } ?>
+		<?php if ($requesting == 'date') { ?>
+			<calendar></calendar>
+			<opps-list></opps-list>
+		<?php } ?>
 		</div>
 	</section>
 		
