@@ -4,8 +4,8 @@ function wbstarter_styles() {
 	wp_enqueue_style( 'slick_css', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css' );
 	wp_enqueue_style( 'fontawsome_css', '//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css' );
 	wp_enqueue_style( 'animate.css', '//cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css' );
-	// wp_enqueue_style( 'bootstrap_css', get_stylesheet_directory_uri().'/css/bootstrap.min.css' );
-	wp_enqueue_style( 'bootstrap_css', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' );
+	wp_enqueue_style( 'bootstrap_css', get_stylesheet_directory_uri().'/css/bootstrap.min.css' );
+	// wp_enqueue_style( 'bootstrap_css', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' );
 	wp_enqueue_style( 'angular_loading_bar_css', get_stylesheet_directory_uri(). '/app/lib/loading-bar.min.css' );
 	wp_enqueue_style( 'angular_tooltip_css', get_stylesheet_directory_uri(). '/app/lib/angular-tooltips.min.css' );
 	wp_enqueue_style( 'main_css',get_stylesheet_directory_uri(). '/vdc.css' );

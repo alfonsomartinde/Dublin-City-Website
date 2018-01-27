@@ -45,21 +45,26 @@ angular.module('calendar')
 
       function populateEventsPerDay() {
         $scope.days = getAllDays();
-
         _.each($scope.days, function(day){
           var opps = [];
+          var dateToCheck = day.date;
 
+          // NOT OPTIMISED VERSION
+          // _.each($scope.opps, function(opp){
+          //   _.each(opp.acf.dates, function(date){
+          //     if (dateStrToDate(date.date).getTime() === dateToCheck.getTime()) {
+          //       opps.push(opp);
+          //     }
+          //   });
+          // });
+
+          // CUSTOM VERSION (Optimised)
           _.each($scope.opps, function(opp){
-            var fromDate = dateStrToDate(opp.from_date);
-            var toDate = dateStrToDate(opp.to_date);
-            var dateToCheck = day.date;
-
-            if(
-              dateToCheck.getTime() >= fromDate.getTime() &&
-              dateToCheck.getTime() <= toDate.getTime()
-            ) {
-              opps.push(opp);
-            }
+            _.each(opp.dates, function(date){
+              if (dateStrToDate(date).getTime() === dateToCheck.getTime()) {
+                opps.push(opp);
+              }
+            });
           });
 
           day.opps = opps;

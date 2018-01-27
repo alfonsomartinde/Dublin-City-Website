@@ -187,11 +187,11 @@ function getSection($parent){
 
 	elseif($parent == 6){
 		return  "org"; }
-	
+
 	else{
 		return "null";
 	}
-	
+
 	// return $post->ID;
 }
 
@@ -206,23 +206,10 @@ endif; // wbstarter_setup
 add_action( 'after_setup_theme', 'wbstarter_setup' );
 
 /*
-http://localhost/vdc/wp-json/wp/v2/opps-api?meta_query[relation]=OR&meta_query[0][key]=from_date&meta_query[0][value]=2017-10-10&meta_query[0][compare]==&meta_query[0][type]=DATE&meta_query[1][key]=to_date&meta_query[1][value]=2017-10-12&meta_query[1][compare]==&meta_query[1][type]=DATE
+http://localhost/vdc/wp-json/wp/v2/opps-api-custom?&meta_query[0][key]=dates&meta_query[0][value][0]=2018-01-01&meta_query[0][value][1]=2018-01-31&meta_query[0][compare]=BETWEEN&meta_query[0][type]=DATE
 
-/wp-json/wp/v2/opps-api?
-meta_query[relation]=OR&
-meta_query[0][key]=from_date&
-meta_query[0][value]=2017-10-10&
-meta_query[0][compare]==&
-meta_query[0][type]=DATE&
-meta_query[1][key]=to_date&
-meta_query[1][value]=2017-10-12&
-meta_query[1][compare]==&
-meta_query[1][type]=DATE
-
-http://localhost/vdc/wp-json/wp/v2/opps-api?&meta_query[0][key]=from_date&meta_query[0][value][0]=2017-10-01&meta_query[0][value][1]=2017-11-31&meta_query[0][compare]=BETWEEN&meta_query[0][type]=DATE
-
-/wp-json/wp/v2/opps-api?
-meta_query[0][key]=from_date&
+/wp-json/wp/v2/opps-api-custom?
+meta_query[0][key]=dates&
 meta_query[0][value][0]=2017-10-01&
 meta_query[0][value][1]=2017-11-31&
 meta_query[0][compare]=BETWEEN&
@@ -235,7 +222,7 @@ class Opps_Posts_Controller extends WP_REST_Controller {
     $this->debug         = false;
   	$this->version       = '2';
     $this->namespace     = '/wp/v' . $this->version;
-    $this->resource_name = 'opps-api';
+    $this->resource_name = 'opps-api-custom';
   }
 
   public function validate_meta_query_param($param, $request, $key) {
@@ -246,6 +233,7 @@ class Opps_Posts_Controller extends WP_REST_Controller {
 		return is_numeric( $param );
 	}
 
+  // API
   // Register our routes.
   public function register_routes() {
     register_rest_route( $this->namespace, '/' . $this->resource_name, array(
@@ -319,7 +307,8 @@ class Opps_Posts_Controller extends WP_REST_Controller {
    * @param WP_REST_Request $request Current request.
    */
   public function prepare_args ( WP_REST_Request $request ) {
- 		$meta_query_param = $request['meta_query'];
+
+    $meta_query_param = $request['meta_query'];
 
 	  $args = array (
 	  	'numberposts' => -1, // All opps
@@ -327,8 +316,11 @@ class Opps_Posts_Controller extends WP_REST_Controller {
 	    'post_status' => 'publish'
 	  );
 
-	  $args['meta_query'] = $this->recursive_sanitize_text_field($meta_query_param);
-	  // $args['meta_query'] = $meta_query_param;
+    if (is_array($meta_query_param)) {
+      $args['meta_query'] = $this->recursive_sanitize_text_field($meta_query_param);
+    } else {
+      $args['meta_query'] = $meta_query_param;
+    }
 
 		return $args;
   }
@@ -348,24 +340,48 @@ class Opps_Posts_Controller extends WP_REST_Controller {
   		print_r($the_query->request);
     }
 
-    $posts = get_posts( $args );
+    // $posts = get_posts( $args );
+    global $wpdb;
+    $posts = $wpdb->get_results("
+      SELECT * FROM {$wpdb->prefix}posts p
+      LEFT JOIN {$wpdb->prefix}postmeta pm
+        ON
+          pm.post_id = p.ID
+        AND
+          pm.meta_key LIKE 'dates_%'
+      WHERE
+        p.post_type = 'opp'
+      AND
+        p.post_status = 'publish'
+      AND
+        pm.meta_value
+      BETWEEN
+        CAST('".$args['meta_query'][0]['value'][0]."' AS DATE)
+      AND
+        CAST('".$args['meta_query'][0]['value'][1]."' AS DATE)
+      GROUP BY p.ID
+      ORDER BY pm.meta_value ASC
+    ");
 
     $data = array();
 
     if ( empty( $posts ) ) {
-      return rest_ensure_response( $data );
-      // return new WP_REST_Response( [], 200 );
+      // return rest_ensure_response( $data );
+      return new WP_REST_Response( $data, 200 );
     }
 
     foreach ( $posts as $post ) {
     	// Debug
       if ($this->debug === true) {
-      	print_r($post);
+        print_r($post);
         print_r(get_post_custom($post->ID));
         print_r(get_post_custom($post->ID)['location'][3]);
         print_r(get_post_custom($post->ID)['organisation']);
-      	print_r(get_post_custom($post->ID)['from_date']);
-      	print_r(get_post_custom($post->ID)['to_date']);
+        print_r(get_post_custom($post->ID)['dates']);
+
+        for ($i=0; $i < get_post_custom($post->ID)['dates']; $i++) {
+          print_r(get_post_custom($post->ID)['dates_' . $i . '_date']);
+        }
       }
 
       $response = $this->prepare_item_for_response( $post, $request );
@@ -373,8 +389,8 @@ class Opps_Posts_Controller extends WP_REST_Controller {
     }
 
     // Return all of our comment response data.
-    return rest_ensure_response( $data );
-    // return new WP_REST_Response( $data, 200 );
+    // return rest_ensure_response( $data );
+    return new WP_REST_Response( $data, 200 );
   }
 
   /**
@@ -400,11 +416,21 @@ class Opps_Posts_Controller extends WP_REST_Controller {
     $post = get_post( $id );
 
     if ( empty( $post ) ) {
-      return rest_ensure_response( array() );
-      // return new WP_REST_Response( [], 200 );
+      // return rest_ensure_response( array() );
+      return new WP_REST_Response( [], 200 );
     }
 
     return prepare_item_for_response( $post, $request);
+  }
+
+  private function prepare_dates ($post) {
+    $dates = array();
+    $post = get_post_custom($post->ID);
+    $len = $post['dates'][0];
+    for ($i=0; $i < $len; $i++) {
+      $dates[] = $post['dates_' . $i . '_date'][0];
+    }
+    return $dates;
   }
 
   /**
@@ -430,16 +456,6 @@ class Opps_Posts_Controller extends WP_REST_Controller {
     }
 
     // Checks if field is set in schema.
-    if ( isset( $schema['properties']['custom_fields']['from_date'] ) ) {
-      $post_data['from_date'] = $custom_fields['from_date'][0];
-    }
-
-    // Checks if field is set in schema.
-    if ( isset( $schema['properties']['custom_fields']['to_date'] ) ) {
-      $post_data['to_date'] = $custom_fields['to_date'][0];
-    }
-
-    // Checks if field is set in schema.
     if ( isset( $schema['properties']['custom_fields']['opp_categories'] ) ) {
       $post_data['opp_categories'] = get_post_meta($post->ID,'opp_category')[0];
     }
@@ -459,8 +475,13 @@ class Opps_Posts_Controller extends WP_REST_Controller {
       $post_data['ivol_link'] = get_post_meta($post->ID,'ivol_link')[0];
     }
 
-    return rest_ensure_response( $post_data );
-    // return new WP_REST_Response( $post_data, 200 );
+    // Checks if field is set in schema.
+    if ( isset( $schema['properties']['custom_fields']['dates'] ) ) {
+      $post_data['dates'] = $this->prepare_dates($post);
+    }
+
+    // return rest_ensure_response( $post_data );
+    return new WP_REST_Response( $post_data, 200 );
   }
 
   /**
@@ -518,18 +539,6 @@ class Opps_Posts_Controller extends WP_REST_Controller {
           'readonly'     => true,
         ),
         'custom_fields' => array(
-          'from_date' => array(
-            'description'  => esc_html__( 'Whenever the opportunity starts.' ),
-            'type'         => 'string',
-            'context'      => array( 'view' ),
-            'readonly'     => true,
-          ),
-          'to_date' => array(
-            'description'  => esc_html__( 'Whenever the opportunity ends.' ),
-            'type'         => 'string',
-            'context'      => array( 'view' ),
-            'readonly'     => true,
-          ),
           'opp_categories' => array(
             'description'  => esc_html__( 'The categories of that opportunity. Only 4 will be shown.' ),
             'type'         => 'array',
@@ -551,6 +560,12 @@ class Opps_Posts_Controller extends WP_REST_Controller {
           'ivol_link' => array(
             'description'  => esc_html__( 'The iVol link of that opportunity.' ),
             'type'         => 'string',
+            'context'      => array( 'view' ),
+            'readonly'     => true,
+          ),
+          'dates' => array(
+            'description'  => esc_html__( 'The dates of that opportunity.' ),
+            'type'         => 'array',
             'context'      => array( 'view' ),
             'readonly'     => true,
           ),
