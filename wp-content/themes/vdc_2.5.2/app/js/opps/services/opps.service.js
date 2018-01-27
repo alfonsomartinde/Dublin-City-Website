@@ -10,13 +10,12 @@ angular.module('opps')
    *
    * @usage:
    *
-   *    buildRequest(dateStart) --> Will return post just for that day
    *    buildRequest(dateStart, dateEnd) --> Will return post between those dates
    *
    * @expected response:
    *
-   *    /wp-json/wp/v2/opps-api?
-   *      meta_query[0][key]=from_date&
+   *    /wp-json/wp/v2/opps-api-custom?
+   *      meta_query[0][key]=dates&
    *      meta_query[0][value][0]=2017-10-10&
    *      meta_query[0][value][1]=2017-10-13&
    *      meta_query[0][compare]=BETWEEN&
@@ -32,28 +31,16 @@ angular.module('opps')
     var dateEndFormated = dateEnd && $filter('date')(dateEnd, 'yyyy-MM-dd');
 
     if (!_.isDate(dateEnd)) {
-      request = {
-        'meta_query[relation]': 'AND',
-        'meta_query[0][key]': 'from_date',
-        'meta_query[0][value]': dateStartFormated,
-        'meta_query[0][compare]': '<=',
-        'meta_query[0][type]': 'DATE',
-        'meta_query[1][key]': 'to_date',
-        'meta_query[1][value]': dateStartFormated,
-        'meta_query[1][compare]': '>=',
-        'meta_query[1][type]': 'DATE'
-      };
-    } else {
-      request = {
-        'meta_query[0][key]': 'from_date',
-        'meta_query[0][value][0]': dateStartFormated,
-        'meta_query[0][value][1]': dateEndFormated,
-        'meta_query[0][compare]': 'BETWEEN',
-        'meta_query[0][type]': 'DATE'
-      };
+      return;
     }
 
-    return request;
+    return {
+      'meta_query[0][key]': 'dates',
+      'meta_query[0][value][0]': dateStartFormated,
+      'meta_query[0][value][1]': dateEndFormated,
+      'meta_query[0][compare]': 'BETWEEN',
+      'meta_query[0][type]': 'DATE'
+    };
   }
 
   /**

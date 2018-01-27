@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
 Organisation events, no categories
 */
 $vdc_org_events = new CPT(array(
@@ -19,7 +19,7 @@ $vdc_org_events = new CPT(array(
 //     'slug' => 'orgcats'
 // ));
 
-/* 
+/*
 Vol events, no categories
 */
 $vdc_vol_events = new CPT(array(
@@ -51,8 +51,8 @@ $vdc_opportunities = new CPT(array(
 	'slug' => 'opp'
 ), array(
 	'supports'	=> array('title'),
-	// 'show_in_rest'       => true,
-	// 'rest_base'          => 'opps-api',
+	'show_in_rest'       => true,
+	'rest_base'          => 'opps-api',
 	'rest_controller_class' => 'WP_REST_Posts_Controller',
 ));
 

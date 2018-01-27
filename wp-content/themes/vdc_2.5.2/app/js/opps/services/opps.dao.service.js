@@ -18,7 +18,13 @@ angular.module('opps')
    * @return {Promise}
    */
   function getPosts(request) {
-    return $http.get(constants.api_url + 'opps-api', {'params': request})
+
+    // NOT OPTIMISED VERSION
+    // return $http.get(constants.api_url + 'opps-api', {'params': request})
+    //   .then(getPostsSuccess, getPostsError);
+
+    // CUSTOM VERSION (Optimised)
+    return $http.get(constants.api_url + 'opps-api-custom', {'params': request})
       .then(getPostsSuccess, getPostsError);
   }
 
