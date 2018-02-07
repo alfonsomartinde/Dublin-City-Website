@@ -169,8 +169,13 @@ angular.module('calendar')
       $scope.previous = previousMonth;
       $scope.unselectAllDays = unselectAllDays;
     },
-    link: function link(){
+    link: function link(scope, elm){
 
+      function removeLoader() {
+        elm.removeClass('loading');
+      }
+
+      $rootScope.$on('oppsLoaded', removeLoader);
     }
   };
 });
