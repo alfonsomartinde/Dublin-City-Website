@@ -11,7 +11,7 @@ angular.module('calendar')
     templateUrl: constants.template_directory +
       'app/js/calendar/html/day.tmpl.html',
     transclude: false,
-    replace: true,
+    replace: false,
     scope: {
       'day': '=',
       'unselectAllDays': '&'
@@ -23,14 +23,10 @@ angular.module('calendar')
         $rootScope.$emit('oppsLoaded', day.opps);
       };
     },
-    link: function(scope, elm){
+    link: function(scope, elm) {
 
       function doNotMakeItClickable() {
-        elm.removeAttr('href')
-          .removeAttr('ng-click')
-          .attr('aria-role', 'presentation');
-
-        scope.select = _.noop;
+        elm.removeAttr('href').attr('aria-role', 'presentation');
       }
 
       // If there're no opps in this day, then do not make it clickable
